@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".NotebooksFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#F6F8F8">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/edittext_search"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:maxLines="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Search for notebooks"
+                    android:textStyle="normal"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:alpha="0.7"
+                    android:fontFamily="sans-serif-thin"
+                    android:backgroundTint="@android:color/transparent"/>
+                <ImageButton
+                    android:id="@+id/btn_search"
+                    android:layout_width="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_baseline_search_24"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <GridView
+            android:id="@+id/gridView"
+            android:layout_marginTop="10dp"
+            android:horizontalSpacing="20dp"
+            android:verticalSpacing="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="2"/>
+
+    </LinearLayout>
+
+</FrameLayout>
