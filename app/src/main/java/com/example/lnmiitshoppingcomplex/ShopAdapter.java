@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
     Context context;
-    private List<Shop> shops;
+    private List<ShopModel> shops;
 
     /*
      * Provide a reference to the type of views that you are using
@@ -37,7 +37,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         }
     }
 
-    public ShopAdapter(Context context,List<Shop> shops) {
+    public ShopAdapter(Context context,List<ShopModel> shops) {
         this.context=context;
         this.shops=shops;
     }
@@ -61,7 +61,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         TextView status=holder.status;
         CardView shopCard=holder.shopCard;
 
-        Shop shop = shops.get(position);
+        ShopModel shop = shops.get(position);
 
         shopName.setText(shop.getName());
         shopkeeperName.setText(shop.getShopkeeperName());

@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.mytoolbar);
         setSupportActionBar(toolbar);
 
-        List<Shop> shops = new ArrayList<>();
-        Shop s1 = new Shop("Grocery Shop","08:00","22:00","Ramu Bhaiya",R.color.Black);
+        List<ShopModel> shops = new ArrayList<>();
+        ShopModel s1 = new ShopModel("Grocery ShopModel","08:00","22:00","Ramu Bhaiya",R.color.White);
         shops= Arrays.asList(s1,s1,s1,s1,s1,s1,s1);
 
         shopListView = findViewById(R.id.SHOP_LIST_VIEW);

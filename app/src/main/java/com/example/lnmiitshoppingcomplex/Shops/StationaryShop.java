@@ -31,7 +31,7 @@ public class StationaryShop extends AppCompatActivity implements CategoryAdapter
         setContentView(R.layout.activity_stationary_shop);
 
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Stationary and Photostat Shop");
+        toolbar.setTitle("Stationary and Photostat ShopModel");
         setSupportActionBar(toolbar);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);

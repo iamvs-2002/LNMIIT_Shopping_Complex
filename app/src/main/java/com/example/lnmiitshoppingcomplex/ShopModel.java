@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Shop {
+public class ShopModel {
     String name;
     String startTime;
     String endTime;
@@ -16,7 +16,7 @@ public class Shop {
     Boolean status; // 1 for open and 0 for closed
     int color;
 
-    public Shop(String name, String startTime, String endTime, String shopkeeperName,int color) {
+    public ShopModel(String name, String startTime, String endTime, String shopkeeperName, int color) {
         this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
