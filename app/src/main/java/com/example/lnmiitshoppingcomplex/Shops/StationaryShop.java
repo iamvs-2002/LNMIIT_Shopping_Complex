@@ -70,6 +70,7 @@ public class StationaryShop extends AppCompatActivity implements CategoryAdapter
         }
         Toast.makeText(StationaryShop.this, categoryList.get(position).getName(), Toast.LENGTH_SHORT).show();
     }
+
     private void loadFragment(Fragment fragment) {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
