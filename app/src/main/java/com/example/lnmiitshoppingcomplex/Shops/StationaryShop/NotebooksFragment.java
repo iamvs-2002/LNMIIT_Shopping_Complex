@@ -1,4 +1,4 @@
-package com.example.lnmiitshoppingcomplex;
+package com.example.lnmiitshoppingcomplex.Shops.StationaryShop;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
+
+import com.example.lnmiitshoppingcomplex.R;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.CategoryItemAdapter;
 
 public class NotebooksFragment extends Fragment {
 

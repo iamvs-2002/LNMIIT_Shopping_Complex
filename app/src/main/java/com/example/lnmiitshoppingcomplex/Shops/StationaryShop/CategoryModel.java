@@ -1,4 +1,4 @@
-package com.example.lnmiitshoppingcomplex;
+package com.example.lnmiitshoppingcomplex.Shops.StationaryShop;
 
 public class CategoryModel {
     String name;

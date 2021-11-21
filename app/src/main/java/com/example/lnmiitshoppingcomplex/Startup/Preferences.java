@@ -1,4 +1,4 @@
-package com.example.lnmiitshoppingcomplex;
+package com.example.lnmiitshoppingcomplex.Startup;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,4 +1,4 @@
-package com.example.lnmiitshoppingcomplex;
+package com.example.lnmiitshoppingcomplex.Shops.StationaryShop;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.lnmiitshoppingcomplex.R;
+
 class CategoryItemAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater layoutInflater;

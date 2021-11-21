@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LNMIITShoppingComplex">
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".Startup.WelcomeActivity"
             android:exported="false" />
         <activity
-            android:name=".Shops.StationaryShop"
+            android:name=".Shops.StationaryShop.StationaryShop"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".Startup.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

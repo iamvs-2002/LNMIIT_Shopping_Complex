@@ -1,4 +1,4 @@
-package com.example.lnmiitshoppingcomplex.Shops;
+package com.example.lnmiitshoppingcomplex.Shops.StationaryShop;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,9 +12,6 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.lnmiitshoppingcomplex.CategoryAdapter;
-import com.example.lnmiitshoppingcomplex.CategoryModel;
-import com.example.lnmiitshoppingcomplex.NotebooksFragment;
 import com.example.lnmiitshoppingcomplex.R;
 
 import java.util.ArrayList;
