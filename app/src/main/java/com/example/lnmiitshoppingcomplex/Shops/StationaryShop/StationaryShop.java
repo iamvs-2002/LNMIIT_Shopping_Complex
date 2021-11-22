@@ -3,17 +3,14 @@ package com.example.lnmiitshoppingcomplex.Shops.StationaryShop;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +20,9 @@ import android.widget.Toast;
 
 import com.example.lnmiitshoppingcomplex.R;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Category.CategoryAdapter;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Category.CategoryAdapter;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Category.CategoryModel;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Item.ItemAdapter;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Item.ItemAdapter;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Item.ItemModel;
 
@@ -31,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class StationaryShop extends AppCompatActivity implements CategoryAdapter.ItemClickListener {
+public class StationaryShop extends AppCompatActivity {
     private List<CategoryModel> categoryList = new ArrayList<>();
     private CategoryAdapter categoryAdapter;
     private List<ItemModel> itemList = new ArrayList<>();
@@ -42,7 +41,6 @@ public class StationaryShop extends AppCompatActivity implements CategoryAdapter
     boolean isShopkeeper;
     boolean isEmployee;
 
-    @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,17 +76,26 @@ public class StationaryShop extends AppCompatActivity implements CategoryAdapter
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         category_recyclerView.setLayoutManager(mLayoutManager);
         category_recyclerView.setAdapter(categoryAdapter);
-        categoryAdapter.addItemClickListener(this);
+        categoryAdapter.setOnItemClickListener(new CategoryAdapter.onRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(StationaryShop.this, "Hello"+position, Toast.LENGTH_SHORT).show();
+                showItems(position);
+            }
+        });
 
         // Items
         RecyclerView item_recyclerView = findViewById(R.id.item_recyclerView);
         itemAdapter = new ItemAdapter(this, itemList, isShopkeeper, isEmployee);
-        item_recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //item_recyclerView.setLayoutManager(new GridLayoutManager(this, 2, GridLayout.VERTICAL, false));
+        LinearLayoutManager pLayoutManager = new LinearLayoutManager(getApplicationContext());
+        pLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        //item_recyclerView.setLayoutManager(pLayoutManager);
+        item_recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         item_recyclerView.setAdapter(itemAdapter);
     }
-    @SuppressLint("NotifyDataSetChanged")
+
     private void prepareCategories() {
+        // To be fetched from database
         CategoryModel category1 = new CategoryModel("Papers",R.drawable.papers);
         CategoryModel category2 = new CategoryModel("Notebooks",R.drawable.notebooks);
         CategoryModel category3 = new CategoryModel("Pencils",R.drawable.pencils);
@@ -97,45 +104,30 @@ public class StationaryShop extends AppCompatActivity implements CategoryAdapter
         CategoryModel category6 = new CategoryModel("Paints",R.drawable.colorsb);
 
         categoryList = Arrays.asList(category1,category2,category3,category4,category5,category6);
-        //categoryAdapter.notifyDataSetChanged();
-    }
-
-    // For category
-    @Override
-    public void onItemClick(int position) {
-        prepareItems(position);
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private void prepareItems(int position){
-       switch (position){
-           case 1:
-           {
-               Toast.makeText(StationaryShop.this, "position", Toast.LENGTH_SHORT).show();
-               // retrieve the list of items of the category = categoryList[position]
-               // and store it in itemList
-               ItemModel i1 = new ItemModel("Classmate",30,"url",23);
-               ItemModel i2 = new ItemModel("PaperGrid",30,"url",12);
-               ItemModel i3 = new ItemModel("Classmate",30,"url",11);
-               ItemModel i4 = new ItemModel("Factor Notes",30,"url",33);
-               ItemModel i5 = new ItemModel("Classmate",30,"url",15);
-               ItemModel i6 = new ItemModel("Classmate",30,"url",12);
-               ItemModel i7 = new ItemModel("PaperMate",30,"url",46);
-               ItemModel i8 = new ItemModel("Luxor",30,"url",23);
-               ItemModel i9 = new ItemModel("Classmate",30,"url",43);
-               ItemModel i10 = new ItemModel("Luxor",30,"url",22);
-               ItemModel i11 = new ItemModel("PaperGrid",30,"url",10);
-               ItemModel i12 = new ItemModel("Reynolds",30,"url",5);
-               ItemModel i13 = new ItemModel("Classmate",30,"url",75);
-               ItemModel i14 = new ItemModel("Unigo",30,"url",66);
-               ItemModel i15 = new ItemModel("Classmate",30,"url",23);
+    private void showItems(int position) {
+        ItemModel i1 = new ItemModel("Classmate",30,"url",23);
+        ItemModel i2 = new ItemModel("PaperGrid",30,"url",12);
+        ItemModel i3 = new ItemModel("Classmate",30,"url",11);
+        ItemModel i4 = new ItemModel("Factor Notes",30,"url",33);
+        ItemModel i5 = new ItemModel("Classmate",30,"url",15);
+        ItemModel i6 = new ItemModel("Classmate",30,"url",12);
+        ItemModel i7 = new ItemModel("PaperMate",30,"url",46);
+        ItemModel i8 = new ItemModel("Luxor",30,"url",23);
+        ItemModel i9 = new ItemModel("Classmate",30,"url",43);
+        ItemModel i10 = new ItemModel("Luxor",30,"url",22);
+        ItemModel i11 = new ItemModel("PaperGrid",30,"url",10);
+        ItemModel i12 = new ItemModel("Reynolds",30,"url",5);
+        ItemModel i13 = new ItemModel("Classmate",30,"url",75);
+        ItemModel i14 = new ItemModel("Unigo",30,"url",66);
+        ItemModel i15 = new ItemModel("Classmate",30,"url",23);
 
-               itemList = Arrays.asList(i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15);
-               itemAdapter.notifyDataSetChanged();
-           }
-       }
+        itemList = Arrays.asList(i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15);
+        itemAdapter.setItems(itemList);
+        itemAdapter.notifyDataSetChanged();
     }
-
 
     public boolean onPrepareOptionsMenu(Menu menu)
     {

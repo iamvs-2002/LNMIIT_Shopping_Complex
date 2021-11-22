@@ -15,35 +15,50 @@ import com.example.lnmiitshoppingcomplex.R;
 
 import java.util.List;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
-    private List<CategoryModel> categoryList;
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     private Context context;
-    private ItemClickListener mItemClickListener;
-    class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name;
-        ImageView image;
-        MyViewHolder(View view) {
-            super(view);
-            name = view.findViewById(R.id.c_name);
-            image = view.findViewById(R.id.c_img);
-        }
+    private List<CategoryModel> categoryList;
+
+    // Click listener object created for recycler view item click
+    private CategoryAdapter.onRecyclerViewItemClickListener itemListener;
+
+    // Interface to perform action for click on item in recycler view
+    public interface onRecyclerViewItemClickListener {
+        void onItemClick(int position);
     }
+
+    public void setOnItemClickListener(CategoryAdapter.onRecyclerViewItemClickListener itemListener) {
+        this.itemListener=itemListener;
+    }
+
     public CategoryAdapter(Context context, List<CategoryModel> categoryList) {
         this.context = context;
         this.categoryList = categoryList;
     }
-    @NonNull
-    @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_item, parent, false);
-        return new MyViewHolder(itemView);
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView name;
+        ImageView image;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            this.name = itemView.findViewById(R.id.c_name);
+            this.image = itemView.findViewById(R.id.c_img);
+        }
     }
 
-    public void addItemClickListener(ItemClickListener listener) {
-        mItemClickListener = listener;
-    }
+    @NonNull
     @Override
-    public void onBindViewHolder(MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public CategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_item,parent,false);
+
+        CategoryAdapter.ViewHolder viewHolder = new CategoryAdapter.ViewHolder(view);
+
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(CategoryAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         CategoryModel c = categoryList.get(position);
         holder.name.setText(c.getName());
         holder.image.setImageResource(c.getUrl());
@@ -51,18 +66,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mItemClickListener != null) {
-                    mItemClickListener.onItemClick(position);
-                }
+                itemListener.onItemClick(position);
             }
         });
     }
+
     @Override
     public int getItemCount() {
         return categoryList.size();
-    }
-
-    public interface ItemClickListener {
-        void onItemClick(int position);
     }
 }
