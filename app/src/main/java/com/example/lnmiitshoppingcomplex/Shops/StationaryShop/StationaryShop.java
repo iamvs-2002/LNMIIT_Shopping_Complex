@@ -16,7 +16,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.lnmiitshoppingcomplex.R;
@@ -36,6 +38,7 @@ public class StationaryShop extends AppCompatActivity implements CategoryAdapter
     private ItemAdapter itemAdapter;
     Toolbar toolbar;
     String mode;
+    LinearLayout addCategoryLayout;
     boolean isShopkeeper;
     boolean isEmployee;
 
@@ -48,12 +51,18 @@ public class StationaryShop extends AppCompatActivity implements CategoryAdapter
         Intent intent = getIntent();
         mode = intent.getStringExtra("mode");
 
+        addCategoryLayout = findViewById(R.id.addcategory_layout);
+
         if(mode!=null && mode.equals("s")){
             //nav bar is visible
             isShopkeeper = true;
+            addCategoryLayout.setVisibility(View.VISIBLE);
         }
         else if(mode!=null && mode.equals("e")){
             isEmployee = true;
+        }
+        else {
+            addCategoryLayout.setVisibility(View.GONE);
         }
 
         toolbar = findViewById(R.id.toolbar);

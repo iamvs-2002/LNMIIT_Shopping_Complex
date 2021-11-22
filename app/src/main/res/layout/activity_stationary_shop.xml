@@ -19,12 +19,63 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/category_recyclerView"
-        android:layout_marginTop="5dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:id="@+id/addcategory_layout"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                app:cardCornerRadius="60dp"
+                app:cardElevation="1dp"
+                android:clipToPadding="true"
+                android:elevation="1dp"
+                app:cardBackgroundColor="@color/WhiteSmoke">
+
+                <ImageView
+                    android:layout_margin="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_baseline_add_24"
+                    android:cropToPadding="true">
+                </ImageView>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/c_name"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Add Category"
+                android:textSize="13sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="5dp">
+            </TextView>
+
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginLeft="2dp"
+            android:id="@+id/category_recyclerView"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
