@@ -2,19 +2,16 @@ package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Item;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lnmiitshoppingcomplex.R;
@@ -26,18 +23,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     boolean isShopkeeper;
     boolean isEmployee;
     private List<ItemModel> items;
-
-    // Click listener object created for recycler view item click
-    private onRecyclerViewItemClickListener itemListener;
-
-    // Interface to perform action for click on item in recycler view
-    public interface onRecyclerViewItemClickListener {
-        void onItemClick(int position);
-    }
-
-    public void setOnItemClickListener(onRecyclerViewItemClickListener itemListener) {
-        this.itemListener=itemListener;
-    }
 
     /*
      * Provide a reference to the type of views that you are using
@@ -52,9 +37,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         ImageButton decreaseQuantity, increaseQuantity;
 
         public ViewHolder(@NonNull View itemView) {
-
             super(itemView);
-            Log.d("Mytag","Hello1");
             this.itemName=(TextView) itemView.findViewById(R.id.citem_name);
             this.itemPrice=(TextView) itemView.findViewById(R.id.citem_price);
             this.itemQuantity=(TextView) itemView.findViewById(R.id.citem_quantity);
@@ -66,26 +49,28 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     }
 
     public ItemAdapter(Context context, List<ItemModel> items, boolean isShopkeeper, boolean isEmployee) {
-        Log.d("Mytag","Hello4");
         this.context=context;
         this.items=items;
         this.isShopkeeper=isShopkeeper;
         this.isEmployee=isEmployee;
     }
 
+    public void setItems(List<ItemModel> items) {
+        this.items = items;
+    }
+
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("Mytag","Hello5");
+    public ItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.shop_item,parent,false);
 
-        ViewHolder viewHolder = new ViewHolder(view);
+        ItemAdapter.ViewHolder viewHolder = new ItemAdapter.ViewHolder(view);
 
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull ItemAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         TextView itemName=holder.itemName;
         TextView itemPrice=holder.itemPrice;
         TextView itemQuantity=holder.itemQuantity;
@@ -97,13 +82,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         ItemModel item = items.get(position);
 
         itemName.setText(item.getName());
-        itemPrice.setText(item.getPrice());
-        itemQuantity.setText(item.getQuantity());
+        itemPrice.setText(String.valueOf(item.getPrice()));
+        itemQuantity.setText(String.valueOf(item.getQuantity()));
         itemImage.setImageResource(R.drawable.notebooks);
         // change using Glide
-        itemQuantity.setText(item.getQuantity());
-
-        Log.d("Mytag","Hello2");
+        itemQuantity.setText(String.valueOf(item.getQuantity()));
 
         if(isShopkeeper)
             quantity.setVisibility(View.VISIBLE);
@@ -114,21 +97,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 item.setQuantity(item.getQuantity() - 1);
-                itemQuantity.setText(item.getQuantity());
+                itemQuantity.setText(String.valueOf(item.getQuantity()));
             }
         });
         increaseQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 item.setQuantity(item.getQuantity() + 1);
-                itemQuantity.setText(item.getQuantity());
-            }
-        });
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                itemListener.onItemClick(position);
+                itemQuantity.setText(String.valueOf(item.getQuantity()));
             }
         });
     }
