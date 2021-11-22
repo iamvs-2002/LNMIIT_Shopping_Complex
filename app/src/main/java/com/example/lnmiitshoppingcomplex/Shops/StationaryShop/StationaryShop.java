@@ -171,6 +171,7 @@ public class StationaryShop extends AppCompatActivity implements CategoryAdapter
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -179,11 +180,14 @@ public class StationaryShop extends AppCompatActivity implements CategoryAdapter
                 //Toast.makeText(getApplicationContext(),"Refresh Selected",Toast.LENGTH_LONG).show();
                 startActivity(new Intent(StationaryShop.this, LoginActivity.class));
                 return true;
-            case R.id.stationaryshop_shopkeeper_account:
-                Toast.makeText(getApplicationContext(),"My Account",Toast.LENGTH_LONG).show();
-                return true;
             case R.id.stationaryshop_manage_employees:
                 Toast.makeText(getApplicationContext(),"Manage Employees",Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.stationaryshop_manage_items:
+                Toast.makeText(getApplicationContext(),"Manage Items",Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.stationaryshop_settings:
+                Toast.makeText(getApplicationContext(),"Settings",Toast.LENGTH_LONG).show();
                 return true;
             case R.id.stationaryshop_about_us:
                 Toast.makeText(getApplicationContext(),"About Us",Toast.LENGTH_LONG).show();

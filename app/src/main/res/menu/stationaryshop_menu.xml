@@ -11,16 +11,21 @@
 
     <group
         android:id="@+id/stationaryshop_shopkeeper_menu_grp">
+
         <item
-            android:id="@+id/stationaryshop_shopkeeper_account"
-            android:icon="@drawable/ic_baseline_perm_identity_24"
-            android:title="My Account" />
+            android:id="@+id/stationaryshop_manage_items"
+            android:icon="@drawable/ic_baseline_storage_24"
+            android:title="Manage Items" />
 
         <item
             android:id="@+id/stationaryshop_manage_employees"
             android:icon="@drawable/ic_baseline_supervisor_account_24"
             android:title="Manage Employees" />
 
+        <item
+            android:id="@+id/stationaryshop_settings"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="Settings" />
     </group>
 
     <item
@@ -30,6 +35,7 @@
 
     <item
         android:id="@+id/stationaryshop_shopkeeper_logout"
+        android:icon="@drawable/ic_baseline_exit_to_app_24"
         android:title="Logout" />
 
 </menu>

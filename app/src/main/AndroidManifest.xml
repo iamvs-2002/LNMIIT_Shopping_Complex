@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LNMIITShoppingComplex">
         <activity
+            android:name=".Shops.StationaryShop.Menu.ManageEmployees"
+            android:exported="false" />
+        <activity
+            android:name=".Shops.StationaryShop.Menu.AboutUs"
+            android:exported="false" />
+        <activity
+            android:name=".Shops.StationaryShop.Menu.Settings"
+            android:exported="false" />
+        <activity
             android:name=".Shops.StationaryShop.LoginActivity"
             android:exported="false" />
         <activity
