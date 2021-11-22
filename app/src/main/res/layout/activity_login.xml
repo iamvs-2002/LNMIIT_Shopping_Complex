@@ -1,57 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     tools:context=".Shops.StationaryShop.LoginActivity">
-
-    <EditText
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/STATIONARYSHOP_USERNAME"
-        android:layout_gravity="center"
-        android:gravity="start"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:hint="Enter username">
-    </EditText>
-    <EditText
-        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/mytoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/WhiteSmoke" />
+    </com.google.android.material.appbar.AppBarLayout>
+    <LinearLayout
+        android:layout_below="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:inputType="textPassword"
-        android:layout_height="wrap_content"
-        android:id="@+id/STATIONARYSHOP_PASSWORD"
-        android:layout_gravity="center"
-        android:gravity="start"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:hint="Enter password">
-    </EditText>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/STATIONARYSHOP_USERNAME"
+            android:layout_gravity="center"
+            android:gravity="start"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:hint="Enter username">
+        </EditText>
+        <EditText
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:inputType="textPassword"
+            android:layout_height="wrap_content"
+            android:id="@+id/STATIONARYSHOP_PASSWORD"
+            android:layout_gravity="center"
+            android:gravity="start"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:hint="Enter password">
+        </EditText>
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:id="@+id/STATIONARYSHOP_LOGIN_PROGRESS"
-        android:visibility="invisible"/>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:id="@+id/STATIONARYSHOP_LOGIN_PROGRESS"
+            android:visibility="invisible"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/black"
-        android:id="@+id/STATIONARYSHOP_LOGIN_BTN"
-        android:background="@drawable/button_bg"
-        android:text="Log In"
-        android:textAllCaps="false">
-    </androidx.appcompat.widget.AppCompatButton>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:id="@+id/STATIONARYSHOP_LOGIN_BTN"
+            android:background="@drawable/button_bg"
+            android:text="Log In"
+            android:textAllCaps="false">
+        </androidx.appcompat.widget.AppCompatButton>
+    </LinearLayout>
 
-</LinearLayout>
+
+
+
+</RelativeLayout>

@@ -1,5 +1,6 @@
 package com.example.lnmiitshoppingcomplex.Shops.StationaryShop;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
@@ -9,23 +10,29 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.lnmiitshoppingcomplex.HomePage.MainActivity;
 import com.example.lnmiitshoppingcomplex.R;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Category.CategoryAdapter;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Category.CategoryModel;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Item.ItemAdapter;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Item.ItemModel;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Menu.AboutUs.AboutUs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,6 +72,14 @@ public class StationaryShop extends AppCompatActivity implements CategoryAdapter
             addCategoryLayout.setVisibility(View.GONE);
         }
 
+        addCategoryLayout.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.Q)
+            @Override
+            public void onClick(View view) {
+                createAlertDialogForCategory();
+            }
+        });
+
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Stationary and Photostat Shop");
         setSupportActionBar(toolbar);
@@ -87,6 +102,34 @@ public class StationaryShop extends AppCompatActivity implements CategoryAdapter
         //item_recyclerView.setLayoutManager(new GridLayoutManager(this, 2, GridLayout.VERTICAL, false));
         item_recyclerView.setAdapter(itemAdapter);
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    private void createAlertDialogForCategory() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("Add Category");
+
+        // Set an EditText view to get user input
+        final EditText name = new EditText(this);
+        name.setHint("Enter name");
+        alert.setView(name);
+
+        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String c_name = name.getText().toString();
+                Toast.makeText(StationaryShop.this, c_name+" added successfully.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
+            }
+        });
+
+        alert.show();
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     private void prepareCategories() {
         CategoryModel category1 = new CategoryModel("Papers",R.drawable.papers);
@@ -190,7 +233,8 @@ public class StationaryShop extends AppCompatActivity implements CategoryAdapter
                 Toast.makeText(getApplicationContext(),"Settings",Toast.LENGTH_LONG).show();
                 return true;
             case R.id.stationaryshop_about_us:
-                Toast.makeText(getApplicationContext(),"About Us",Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(),"About Us",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(StationaryShop.this, AboutUs.class));
                 return true;
             case R.id.stationaryshop_shopkeeper_logout:
                 Toast.makeText(getApplicationContext(),"Log Out",Toast.LENGTH_LONG).show();
@@ -198,5 +242,12 @@ public class StationaryShop extends AppCompatActivity implements CategoryAdapter
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(StationaryShop.this, MainActivity.class));
+        finish();
     }
 }

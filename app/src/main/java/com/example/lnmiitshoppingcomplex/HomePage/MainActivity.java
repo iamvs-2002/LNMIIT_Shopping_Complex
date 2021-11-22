@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -35,13 +36,13 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         List<ShopModel> shops = new ArrayList<>();
-        ShopModel s1 = new ShopModel("Grocery and Fruit shop","08:00","22:00","Shopkeeper Name", R.color.White);
-        ShopModel s2 = new ShopModel("Barber shop","08:00","22:00","Shopkeeper Name", R.color.White);
-        ShopModel s3 = new ShopModel("Stationary and Photostat shop","08:00","22:00","Shopkeeper Name", R.color.White);
-        ShopModel s4 = new ShopModel("Snacks and Tea Shop","08:00","22:00","Shopkeeper Name", R.color.White);
-        ShopModel s5 = new ShopModel("Amul Dairy and Beverages shop","08:00","22:00","Shopkeeper Name", R.color.White);
-        ShopModel s6 = new ShopModel("Laundry Shop","08:00","22:00","Shopkeeper Name", R.color.White);
-        ShopModel s7 = new ShopModel("Restaurant","08:00","22:00","Shopkeeper Name", R.color.White);
+        ShopModel s1 = new ShopModel("Grocery and Fruit shop","08:00","22:00","Shopkeeper Name", Color.parseColor("#FF6347"));
+        ShopModel s2 = new ShopModel("Barber shop","08:00","22:00","Shopkeeper Name", Color.parseColor("#FF018786"));
+        ShopModel s3 = new ShopModel("Stationary and Photostat shop","08:00","22:00","Shopkeeper Name", Color.parseColor("#C71585"));
+        ShopModel s4 = new ShopModel("Snacks and Tea Shop","08:00","22:00","Shopkeeper Name", Color.parseColor("#228B22"));
+        ShopModel s5 = new ShopModel("Amul Dairy and Beverages shop","08:00","22:00","Shopkeeper Name", Color.parseColor("#BA55D3"));
+        ShopModel s6 = new ShopModel("Laundry Shop","08:00","22:00","Shopkeeper Name", Color.parseColor("#00008B"));
+        ShopModel s7 = new ShopModel("Restaurant","08:00","22:00","Shopkeeper Name", Color.parseColor("#8A2BE2"));
 
         shops= Arrays.asList(s1,s2,s3,s4,s5,s6,s7);
 
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     case 1 : Toast.makeText(MainActivity.this, "Shop2", Toast.LENGTH_SHORT).show();
                         break;
 
-                    case 2 : Toast.makeText(MainActivity.this, "Shop3", Toast.LENGTH_SHORT).show();
+                    case 2 : //Toast.makeText(MainActivity.this, "Shop3", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(MainActivity.this, StationaryShop.class));
                         break;
 

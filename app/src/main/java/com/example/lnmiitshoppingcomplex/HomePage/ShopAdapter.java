@@ -2,12 +2,15 @@ package com.example.lnmiitshoppingcomplex.HomePage;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -68,6 +71,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         return viewHolder;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         TextView shopName=holder.shopName;
@@ -85,7 +89,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         String temp = shop.status ? "Open" : "Closed";
         status.setText(temp);
 
-        shopCard.setCardBackgroundColor(shop.color);
+        shopCard.setCardBackgroundColor(shop.getColor());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
