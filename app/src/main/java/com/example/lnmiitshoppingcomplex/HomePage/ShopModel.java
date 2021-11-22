@@ -1,4 +1,4 @@
-package com.example.lnmiitshoppingcomplex;
+package com.example.lnmiitshoppingcomplex.HomePage;
 
 import android.annotation.SuppressLint;
 

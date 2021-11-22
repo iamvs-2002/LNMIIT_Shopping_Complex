@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LNMIITShoppingComplex">
         <activity
+            android:name=".Shops.StationaryShop.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".Startup.WelcomeActivity"
             android:exported="false" />
         <activity
@@ -25,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".HomePage.MainActivity"
             android:exported="true" />
     </application>
 

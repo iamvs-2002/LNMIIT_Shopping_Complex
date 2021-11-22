@@ -21,7 +21,7 @@ import android.widget.TextView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.lnmiitshoppingcomplex.MainActivity;
+import com.example.lnmiitshoppingcomplex.HomePage.MainActivity;
 import com.example.lnmiitshoppingcomplex.R;
 
 public class WelcomeActivity extends AppCompatActivity {

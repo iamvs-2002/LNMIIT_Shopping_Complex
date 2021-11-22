@@ -1,4 +1,4 @@
-package com.example.lnmiitshoppingcomplex.Shops.StationaryShop;
+package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Category;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -28,7 +28,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
             image = view.findViewById(R.id.c_img);
         }
     }
-    public CategoryAdapter(List<CategoryModel> categoryList) {
+    public CategoryAdapter(Context context, List<CategoryModel> categoryList) {
+        this.context = context;
         this.categoryList = categoryList;
     }
     @NonNull

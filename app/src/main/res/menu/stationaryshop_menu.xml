@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/stationaryshop_login"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_baseline_login_24"
+        android:title="Login" />
+
+    <group
+        android:id="@+id/stationaryshop_shopkeeper_menu_grp">
+        <item
+            android:id="@+id/stationaryshop_shopkeeper_account"
+            android:icon="@drawable/ic_baseline_perm_identity_24"
+            android:title="My Account" />
+
+        <item
+            android:id="@+id/stationaryshop_manage_employees"
+            android:icon="@drawable/ic_baseline_supervisor_account_24"
+            android:title="Manage Employees" />
+
+    </group>
+
+    <item
+        android:id="@+id/stationaryshop_about_us"
+        android:icon="@drawable/ic_baseline_wb_incandescent_24"
+        android:title="About Us" />
+
+    <item
+        android:id="@+id/stationaryshop_shopkeeper_logout"
+        android:title="Logout" />
+
+</menu>

@@ -1,4 +1,4 @@
-package com.example.lnmiitshoppingcomplex;
+package com.example.lnmiitshoppingcomplex.HomePage;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.lnmiitshoppingcomplex.R;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.StationaryShop;
 
 import java.util.ArrayList;
@@ -34,8 +35,15 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         List<ShopModel> shops = new ArrayList<>();
-        ShopModel s1 = new ShopModel("Grocery Shop","08:00","22:00","Ramu Bhaiya",R.color.Black);
-        shops= Arrays.asList(s1,s1,s1,s1,s1,s1,s1);
+        ShopModel s1 = new ShopModel("Grocery and Fruit shop","08:00","22:00","Shopkeeper Name", R.color.White);
+        ShopModel s2 = new ShopModel("Barber shop","08:00","22:00","Shopkeeper Name", R.color.White);
+        ShopModel s3 = new ShopModel("Stationary and Photostat shop","08:00","22:00","Shopkeeper Name", R.color.White);
+        ShopModel s4 = new ShopModel("Snacks and Tea Shop","08:00","22:00","Shopkeeper Name", R.color.White);
+        ShopModel s5 = new ShopModel("Amul Dairy and Beverages shop","08:00","22:00","Shopkeeper Name", R.color.White);
+        ShopModel s6 = new ShopModel("Laundry Shop","08:00","22:00","Shopkeeper Name", R.color.White);
+        ShopModel s7 = new ShopModel("Restaurant","08:00","22:00","Shopkeeper Name", R.color.White);
+
+        shops= Arrays.asList(s1,s2,s3,s4,s5,s6,s7);
 
         shopListView = findViewById(R.id.SHOP_LIST_VIEW);
         ShopAdapter adapter = new ShopAdapter(this,shops);
@@ -52,10 +60,10 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 2 : Toast.makeText(MainActivity.this, "Shop3", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this, StationaryShop.class));
                         break;
 
                     case 3 : Toast.makeText(MainActivity.this, "Shop4", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(MainActivity.this, StationaryShop.class));
                         break;
 
                     case 4 : Toast.makeText(MainActivity.this, "Shop5", Toast.LENGTH_SHORT).show();
@@ -79,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         if (menu instanceof MenuBuilder) {
             ((MenuBuilder) menu).setOptionalIconsVisible(true);
         }
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.home_menu, menu);
         return true;
     }
 
