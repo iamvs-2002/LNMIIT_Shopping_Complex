@@ -67,12 +67,14 @@ public class StationaryShop extends AppCompatActivity {
             //nav bar is visible
             isShopkeeper = true;
             addCategoryLayout.setVisibility(View.VISIBLE);
+            addItemEfab.setVisibility(View.VISIBLE);
         }
         else if(mode!=null && mode.equals("e")){
             isEmployee = true;
         }
         else {
             addCategoryLayout.setVisibility(View.GONE);
+            addItemEfab.setVisibility(View.GONE);
         }
 
         toolbar = findViewById(R.id.toolbar);
