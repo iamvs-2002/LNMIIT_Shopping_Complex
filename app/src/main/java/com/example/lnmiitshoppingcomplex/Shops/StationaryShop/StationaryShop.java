@@ -18,6 +18,7 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.lnmiitshoppingcomplex.AddItem;
 import com.example.lnmiitshoppingcomplex.HomePage.MainActivity;
 import com.example.lnmiitshoppingcomplex.R;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Category.CategoryAdapter;
@@ -26,6 +27,8 @@ import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Category.CategoryM
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Item.ItemAdapter;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Item.ItemAdapter;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Item.ItemModel;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Menu.ManageEmployees;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,6 +44,7 @@ public class StationaryShop extends AppCompatActivity {
     LinearLayout addCategoryLayout;
     boolean isShopkeeper;
     boolean isEmployee;
+    ExtendedFloatingActionButton addItemEfab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,13 @@ public class StationaryShop extends AppCompatActivity {
 
         Intent intent = getIntent();
         mode = intent.getStringExtra("mode");
+        addItemEfab = findViewById(R.id.addItemEfab);
+        addItemEfab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(StationaryShop.this, AddItem.class));
+            }
+        });
 
         addCategoryLayout = findViewById(R.id.addcategory_layout);
 
@@ -106,6 +117,7 @@ public class StationaryShop extends AppCompatActivity {
 
     @SuppressLint("NotifyDataSetChanged")
     private void showItems(int position) {
+        Log.d("XYZ","error");
         ItemModel i1 = new ItemModel("Classmate",30,"url",23);
         ItemModel i2 = new ItemModel("PaperGrid",30,"url",12);
         ItemModel i3 = new ItemModel("Classmate",30,"url",11);
@@ -171,7 +183,8 @@ public class StationaryShop extends AppCompatActivity {
                 startActivity(new Intent(StationaryShop.this, LoginActivity.class));
                 return true;
             case R.id.stationaryshop_manage_employees:
-                Toast.makeText(getApplicationContext(),"Manage Employees",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(StationaryShop.this, ManageEmployees.class));
+                //Toast.makeText(getApplicationContext(),"Manage Employees",Toast.LENGTH_LONG).show();
                 return true;
             case R.id.stationaryshop_manage_items:
                 Toast.makeText(getApplicationContext(),"Manage Items",Toast.LENGTH_LONG).show();

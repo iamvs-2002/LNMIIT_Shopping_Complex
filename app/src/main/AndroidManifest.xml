@@ -39,6 +39,9 @@
         <activity
             android:name=".HomePage.MainActivity"
             android:exported="true" />
+        <activity
+            android:name=".AddItem"
+            android:exported="false" />
     </application>
 
 </manifest>
