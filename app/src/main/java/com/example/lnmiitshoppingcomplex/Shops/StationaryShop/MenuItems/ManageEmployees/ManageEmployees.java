@@ -1,4 +1,4 @@
-package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Menu;
+package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.ManageEmployees;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.lnmiitshoppingcomplex.R;
-import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Employee.EmployeeAdapter;
-import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Employee.EmployeeModel;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.ManageEmployees.Classes.EmployeeAdapter;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.ManageEmployees.Classes.EmployeeModel;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import java.util.ArrayList;

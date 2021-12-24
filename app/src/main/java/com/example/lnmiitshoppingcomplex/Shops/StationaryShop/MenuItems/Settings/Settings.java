@@ -1,4 +1,4 @@
-package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Menu;
+package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.Settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 

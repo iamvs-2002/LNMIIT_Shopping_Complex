@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Shops.StationaryShop.Menu.AboutUs.AboutUs">
+    tools:context=".Shops.StationaryShop.MenuItems.AboutUs.AboutUs">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"

@@ -10,22 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LNMIITShoppingComplex">
         <activity
-            android:name=".Shops.StationaryShop.Menu.ManageEmployees"
+            android:name=".Shops.StationaryShop.MenuItems.ManageEmployees.ManageEmployees"
             android:exported="false" />
         <activity
-            android:name=".Shops.StationaryShop.Menu.AboutUs.AboutUs"
+            android:name=".Shops.StationaryShop.MenuItems.AboutUs.AboutUs"
             android:exported="false" />
         <activity
-            android:name=".Shops.StationaryShop.Menu.Settings"
+            android:name=".Shops.StationaryShop.MenuItems.Settings.Settings"
             android:exported="false" />
         <activity
-            android:name=".Shops.StationaryShop.LoginActivity"
+            android:name=".Shops.StationaryShop.HomePage.Login.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".Startup.WelcomeActivity"
             android:exported="false" />
         <activity
-            android:name=".Shops.StationaryShop.StationaryShop"
+            android:name=".Shops.StationaryShop.HomePage.StationaryShop"
             android:exported="false" />
         <activity
             android:name=".Startup.SplashActivity"
@@ -40,7 +40,7 @@
             android:name=".HomePage.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".AddItem"
+            android:name=".Shops.StationaryShop.HomePage.AddItem.AddItem"
             android:exported="false" />
     </application>
 

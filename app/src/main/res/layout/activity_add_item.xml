@@ -5,7 +5,7 @@
     android:id="@+id/topLayoutAddMenuItem"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Shops.StationaryShop.Menu.ManageEmployees">
+    tools:context=".Shops.StationaryShop.MenuItems.ManageEmployees.ManageEmployees">
 
     <LinearLayout
         android:layout_width="match_parent"

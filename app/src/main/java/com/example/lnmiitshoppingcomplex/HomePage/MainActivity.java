@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.lnmiitshoppingcomplex.R;
-import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.StationaryShop;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.HomePage.StationaryShop;
 
 import java.util.ArrayList;
 import java.util.Arrays;

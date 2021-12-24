@@ -1,4 +1,4 @@
-package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Item;
+package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Item;
 
 public class ItemModel {
     String name;

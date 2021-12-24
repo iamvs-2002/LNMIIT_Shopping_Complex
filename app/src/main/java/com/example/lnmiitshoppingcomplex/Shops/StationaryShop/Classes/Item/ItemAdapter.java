@@ -1,8 +1,7 @@
-package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Item;
+package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Item;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

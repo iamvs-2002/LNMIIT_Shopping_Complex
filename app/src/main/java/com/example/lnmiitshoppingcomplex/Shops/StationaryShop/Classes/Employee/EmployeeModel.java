@@ -1,4 +1,4 @@
-package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Menu.AboutUs;
+package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Employee;
 
 public class EmployeeModel {
     String name;

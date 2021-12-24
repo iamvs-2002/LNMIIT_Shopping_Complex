@@ -1,4 +1,4 @@
-package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Menu.AboutUs;
+package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.AboutUs;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -6,12 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.lnmiitshoppingcomplex.R;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Employee.EmployeeAdapter;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Employee.EmployeeModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.example.lnmiitshoppingcomplex;
+package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.HomePage.AddItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.lnmiitshoppingcomplex.R;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 public class AddItem extends AppCompatActivity {

@@ -1,10 +1,9 @@
-package com.example.lnmiitshoppingcomplex.Shops.StationaryShop;
+package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.HomePage.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.lnmiitshoppingcomplex.R;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.HomePage.StationaryShop;
 
 public class LoginActivity extends AppCompatActivity {
     Toolbar toolbar;

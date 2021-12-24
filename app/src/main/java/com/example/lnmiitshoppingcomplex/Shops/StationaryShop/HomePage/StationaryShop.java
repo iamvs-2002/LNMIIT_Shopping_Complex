@@ -1,4 +1,4 @@
-package com.example.lnmiitshoppingcomplex.Shops.StationaryShop;
+package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.HomePage;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
@@ -14,20 +14,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.lnmiitshoppingcomplex.AddItem;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.HomePage.AddItem.AddItem;
 import com.example.lnmiitshoppingcomplex.HomePage.MainActivity;
 import com.example.lnmiitshoppingcomplex.R;
-import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Category.CategoryAdapter;
-import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Category.CategoryAdapter;
-import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Category.CategoryModel;
-import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Item.ItemAdapter;
-import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Item.ItemAdapter;
-import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Item.ItemModel;
-import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Menu.ManageEmployees;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Category.CategoryAdapter;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Category.CategoryModel;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Item.ItemAdapter;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Item.ItemModel;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.HomePage.Login.LoginActivity;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.ManageEmployees.ManageEmployees;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import java.util.ArrayList;
