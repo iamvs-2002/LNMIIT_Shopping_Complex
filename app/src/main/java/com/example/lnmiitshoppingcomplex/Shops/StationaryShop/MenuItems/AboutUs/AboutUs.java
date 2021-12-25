@@ -9,8 +9,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.lnmiitshoppingcomplex.R;
-import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Employee.EmployeeAdapter;
-import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Employee.EmployeeModel;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.AboutUs.Classes.EmployeeAdapter;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.AboutUs.Classes.EmployeeModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;

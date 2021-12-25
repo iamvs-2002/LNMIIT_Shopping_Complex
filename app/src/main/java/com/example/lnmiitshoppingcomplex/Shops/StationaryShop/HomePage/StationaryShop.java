@@ -25,6 +25,7 @@ import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Category.C
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Item.ItemAdapter;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Item.ItemModel;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.HomePage.Login.LoginActivity;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.AboutUs.AboutUs;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.ManageEmployees.ManageEmployees;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
@@ -193,7 +194,8 @@ public class StationaryShop extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Settings",Toast.LENGTH_LONG).show();
                 return true;
             case R.id.stationaryshop_about_us:
-                Toast.makeText(getApplicationContext(),"About Us",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(StationaryShop.this, AboutUs.class));
+                //Toast.makeText(getApplicationContext(),"About Us",Toast.LENGTH_LONG).show();
                 return true;
             case R.id.stationaryshop_shopkeeper_logout:
                 Toast.makeText(getApplicationContext(),"Log Out",Toast.LENGTH_LONG).show();

@@ -1,4 +1,4 @@
-package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Employee;
+package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.AboutUs.Classes;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
