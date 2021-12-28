@@ -53,7 +53,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_item,parent,false);
 
         CategoryAdapter.ViewHolder viewHolder = new CategoryAdapter.ViewHolder(view);
-
         return viewHolder;
     }
 

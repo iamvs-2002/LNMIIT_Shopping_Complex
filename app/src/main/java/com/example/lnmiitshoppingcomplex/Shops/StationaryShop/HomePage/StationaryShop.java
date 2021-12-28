@@ -48,8 +48,8 @@ public class StationaryShop extends AppCompatActivity {
     Toolbar toolbar;
     String mode;
     LinearLayout addCategoryLayout;
-    boolean isShopkeeper;
-    boolean isEmployee;
+    static boolean isShopkeeper;
+    static boolean isEmployee;
     ExtendedFloatingActionButton addItemEfab;
 
     @Override
@@ -103,6 +103,8 @@ public class StationaryShop extends AppCompatActivity {
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         category_recyclerView.setLayoutManager(mLayoutManager);
         category_recyclerView.setAdapter(categoryAdapter);
+
+        // item click listener for every category
         categoryAdapter.setOnItemClickListener(new CategoryAdapter.onRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -115,9 +117,11 @@ public class StationaryShop extends AppCompatActivity {
         RecyclerView item_recyclerView = findViewById(R.id.item_recyclerView);
         itemAdapter = new ItemAdapter(this, itemList, isShopkeeper, isEmployee);
         item_recyclerView.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.VERTICAL, false));
+        item_recyclerView.addItemDecoration(new GridSpacingItemDecoration(50));
         item_recyclerView.setAdapter(itemAdapter);
     }
 
+    // for add category
     private void showAlertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -185,8 +189,7 @@ public class StationaryShop extends AppCompatActivity {
         itemAdapter.notifyDataSetChanged();
     }
 
-    public boolean onPrepareOptionsMenu(Menu menu)
-    {
+    public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem shopkeeper_login = menu.findItem(R.id.stationaryshop_login);
         MenuItem shopkeeper_logout = menu.findItem(R.id.stationaryshop_shopkeeper_logout);
         if(mode!=null && mode.equals("s")) //shopkeeper
@@ -197,7 +200,9 @@ public class StationaryShop extends AppCompatActivity {
         }
         else if(mode!=null && mode.equals("e")) //employee
         {
-
+            menu.setGroupVisible(R.id.stationaryshop_shopkeeper_menu_grp, false);
+            shopkeeper_login.setVisible(false);
+            shopkeeper_logout.setVisible(true);
         }
         else
         {
@@ -231,9 +236,6 @@ public class StationaryShop extends AppCompatActivity {
             case R.id.stationaryshop_manage_employees:
                 startActivity(new Intent(StationaryShop.this, ManageEmployees.class));
                 //Toast.makeText(getApplicationContext(),"Manage Employees",Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.stationaryshop_settings:
-                Toast.makeText(getApplicationContext(),"Settings",Toast.LENGTH_LONG).show();
                 return true;
             case R.id.stationaryshop_about_us:
                 startActivity(new Intent(StationaryShop.this, AboutUs.class));

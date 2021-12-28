@@ -89,61 +89,17 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="5dp"
-            android:background="@color/LightGrey"></TextView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            app:cardBackgroundColor="#F6F8F8"
-            app:cardCornerRadius="30dp"
-            app:cardElevation="0dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingStart="20dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp">
-
-                <EditText
-                    android:id="@+id/edittext_search"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:alpha="0.7"
-                    android:backgroundTint="@android:color/transparent"
-                    android:fontFamily="sans-serif-thin"
-                    android:gravity="center_vertical"
-                    android:hint="Search for notebooks"
-                    android:maxLines="1"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="15sp"
-                    android:textStyle="normal" />
-
-                <ImageButton
-                    android:id="@+id/btn_search"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="10dp"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/ic_baseline_search_24" />
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
+            android:background="@color/LightGrey">
+        </TextView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/item_recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal" />
+            android:layout_gravity="center"
 
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:clipToPadding="false"
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton

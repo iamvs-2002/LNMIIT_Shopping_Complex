@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
-    android:layout_width="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:layout_marginLeft="25dp"
+    android:layout_width="180dp"
+    android:clipToPadding="false"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="30dp"
     android:layout_height="wrap_content"
@@ -15,11 +14,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <ImageView
             android:id="@+id/citem_img"
             android:layout_width="140dp"
             android:layout_height="140dp"
+            android:scaleType="fitXY"
+            android:padding="10dp"
             android:src="@drawable/notebooks">
         </ImageView>
         <TextView
@@ -41,26 +41,22 @@
                 android:background="@android:color/transparent"
                 android:layout_height="wrap_content">
             </ImageButton>
-            <androidx.cardview.widget.CardView
+            <EditText
+                android:id="@+id/citem_quantity"
                 android:layout_width="wrap_content"
-                android:layout_marginLeft="10dp"
-                app:cardElevation="0dp"
+                android:paddingLeft="20dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:paddingRight="20dp"
+                android:textSize="12sp"
+                android:background="@color/White"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/white">
-                <EditText
-                    android:id="@+id/citem_quantity"
-                    android:layout_width="wrap_content"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:textSize="14sp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:backgroundTint="@color/white"
-                    android:layout_height="wrap_content"
-                    android:text="20">
-                </EditText>
-            </androidx.cardview.widget.CardView>
+                android:text="20">
+            </EditText>
             <ImageButton
                 android:id="@+id/citem_quantity_increase"
                 android:src="@drawable/ic_baseline_arrow_right_24"
@@ -79,6 +75,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="2dp"
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/citem_name"
@@ -89,7 +87,7 @@
                 android:maxLength="10"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="18sp">
+                android:textSize="15sp">
             </TextView>
             <View
                 android:layout_width="0dp"
@@ -101,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:text="Rs. "
                 android:textColor="@color/black"
-                android:textSize="16sp">
+                android:textSize="15sp">
             </TextView>
             <TextView
                 android:id="@+id/citem_price"
@@ -109,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:text="4"
                 android:textColor="@color/black"
-                android:textSize="16sp">
+                android:textSize="15sp">
             </TextView>
         </LinearLayout>
 
