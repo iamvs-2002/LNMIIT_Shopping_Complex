@@ -11,12 +11,6 @@
 
     <group
         android:id="@+id/stationaryshop_shopkeeper_menu_grp">
-
-        <item
-            android:id="@+id/stationaryshop_manage_items"
-            android:icon="@drawable/ic_baseline_storage_24"
-            android:title="Manage Items" />
-
         <item
             android:id="@+id/stationaryshop_manage_employees"
             android:icon="@drawable/ic_baseline_supervisor_account_24"

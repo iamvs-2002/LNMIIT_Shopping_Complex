@@ -8,12 +8,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -28,6 +34,7 @@ import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.HomePage.Login.Log
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.AboutUs.AboutUs;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.ManageEmployees.ManageEmployees;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -82,6 +89,13 @@ public class StationaryShop extends AppCompatActivity {
 
         prepareCategories();
 
+        addCategoryLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAlertDialog();
+            }
+        });
+
         // Category
         RecyclerView category_recyclerView = findViewById(R.id.category_recyclerView);
         categoryAdapter = new CategoryAdapter(this, categoryList);
@@ -102,6 +116,37 @@ public class StationaryShop extends AppCompatActivity {
         itemAdapter = new ItemAdapter(this, itemList, isShopkeeper, isEmployee);
         item_recyclerView.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.VERTICAL, false));
         item_recyclerView.setAdapter(itemAdapter);
+    }
+
+    private void showAlertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // set the custom layout
+        final View customLayout = getLayoutInflater().inflate(R.layout.add_category, null);
+        builder.setView(customLayout);
+        builder.setCancelable(false);
+
+        ImageView imageView = customLayout.findViewById(R.id.addCategoryImg);
+        MaterialEditText editText = customLayout.findViewById(R.id.categoryNameMet);
+        ImageButton savebtn = customLayout.findViewById(R.id.saveCategoryBtn);
+        ImageButton closebtn = customLayout.findViewById(R.id.dialog_cancel_btn);
+
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        savebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(StationaryShop.this, "Saved!", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+        closebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     private void prepareCategories() {
@@ -187,9 +232,6 @@ public class StationaryShop extends AppCompatActivity {
                 startActivity(new Intent(StationaryShop.this, ManageEmployees.class));
                 //Toast.makeText(getApplicationContext(),"Manage Employees",Toast.LENGTH_LONG).show();
                 return true;
-            case R.id.stationaryshop_manage_items:
-                Toast.makeText(getApplicationContext(),"Manage Items",Toast.LENGTH_LONG).show();
-                return true;
             case R.id.stationaryshop_settings:
                 Toast.makeText(getApplicationContext(),"Settings",Toast.LENGTH_LONG).show();
                 return true;
@@ -198,7 +240,9 @@ public class StationaryShop extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(),"About Us",Toast.LENGTH_LONG).show();
                 return true;
             case R.id.stationaryshop_shopkeeper_logout:
-                Toast.makeText(getApplicationContext(),"Log Out",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(StationaryShop.this, StationaryShop.class));
+                finish();
+                finishAffinity();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

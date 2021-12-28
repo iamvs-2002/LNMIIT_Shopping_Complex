@@ -96,7 +96,6 @@
             app:met_textColor="@android:color/black" />
 
     </LinearLayout>
-
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/saveItemEfab"
         android:layout_width="wrap_content"
@@ -111,5 +110,4 @@
         app:rippleColor="@android:color/holo_green_light"
         app:strokeColor="@android:color/black"
         app:strokeWidth="1dp" />
-
 </RelativeLayout>

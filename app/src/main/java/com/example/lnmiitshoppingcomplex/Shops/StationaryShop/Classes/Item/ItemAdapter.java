@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,10 +28,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView itemName;
         TextView itemPrice;
-        TextView itemQuantity;
+        EditText itemQuantity;
         ImageView itemImage;
         LinearLayout quantity;
         ImageButton decreaseQuantity, increaseQuantity;
@@ -39,7 +41,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             super(itemView);
             this.itemName=(TextView) itemView.findViewById(R.id.citem_name);
             this.itemPrice=(TextView) itemView.findViewById(R.id.citem_price);
-            this.itemQuantity=(TextView) itemView.findViewById(R.id.citem_quantity);
+            this.itemQuantity=(EditText) itemView.findViewById(R.id.citem_quantity);
             this.itemImage=(ImageView) itemView.findViewById(R.id.citem_img);
             this.quantity=(LinearLayout) itemView.findViewById(R.id.stationary_item_quantity_layout);
             this.decreaseQuantity = (ImageButton) itemView.findViewById(R.id.citem_quantity_decrease);
@@ -72,9 +74,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ItemAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         TextView itemName=holder.itemName;
         TextView itemPrice=holder.itemPrice;
-        TextView itemQuantity=holder.itemQuantity;
-        ImageView itemImage=holder.itemImage;
-        LinearLayout quantity=holder.quantity;
+        EditText itemQuantity=holder.itemQuantity;
+        ImageView itemImage = holder.itemImage;
+        LinearLayout quantity = holder.quantity;
         ImageButton decreaseQuantity=holder.decreaseQuantity;
         ImageButton increaseQuantity=holder.increaseQuantity;
 
@@ -87,10 +89,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         // change using Glide
         itemQuantity.setText(String.valueOf(item.getQuantity()));
 
-        if(isShopkeeper)
-            quantity.setVisibility(View.VISIBLE);
-        else
-            quantity.setVisibility(View.GONE);
+        if(!isShopkeeper){
+            itemQuantity.setClickable(false);
+            itemQuantity.setFocusable(false);
+            itemQuantity.setVisibility(View.VISIBLE);
+            decreaseQuantity.setVisibility(View.GONE);
+            increaseQuantity.setVisibility(View.GONE);
+        }
 
         decreaseQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
