@@ -2,119 +2,154 @@ package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Item;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lnmiitshoppingcomplex.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     Context context;
     boolean isShopkeeper;
     boolean isEmployee;
-    private List<ItemModel> items;
-
-    /*
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder).
-     */
+    private List<ItemModel> itemList;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView itemName;
         TextView itemPrice;
         EditText itemQuantity;
         ImageView itemImage;
-        LinearLayout quantity;
         ImageButton decreaseQuantity, increaseQuantity;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.itemName=(TextView) itemView.findViewById(R.id.citem_name);
-            this.itemPrice=(TextView) itemView.findViewById(R.id.citem_price);
-            this.itemQuantity=(EditText) itemView.findViewById(R.id.citem_quantity);
-            this.itemImage=(ImageView) itemView.findViewById(R.id.citem_img);
-            this.quantity=(LinearLayout) itemView.findViewById(R.id.stationary_item_quantity_layout);
+            this.itemName = (TextView) itemView.findViewById(R.id.citem_name);
+            this.itemPrice = (TextView) itemView.findViewById(R.id.citem_price);
+            this.itemQuantity = (EditText) itemView.findViewById(R.id.citem_quantity);
+            this.itemImage = (ImageView) itemView.findViewById(R.id.citem_img);
             this.decreaseQuantity = (ImageButton) itemView.findViewById(R.id.citem_quantity_decrease);
             this.increaseQuantity = (ImageButton) itemView.findViewById(R.id.citem_quantity_increase);
         }
     }
 
-    public ItemAdapter(Context context, List<ItemModel> items, boolean isShopkeeper, boolean isEmployee) {
-        this.context=context;
-        this.items=items;
-        this.isShopkeeper=isShopkeeper;
-        this.isEmployee=isEmployee;
+    public ItemAdapter(Context context, List<ItemModel> itemList, boolean isShopkeeper, boolean isEmployee) {
+        this.context = context;
+        this.itemList = itemList;
+        this.isShopkeeper = isShopkeeper;
+        this.isEmployee = isEmployee;
     }
 
-    public void setItems(List<ItemModel> items) {
-        this.items = items;
+    public void setItemList(List<ItemModel> itemList) {
+        this.itemList = itemList;
     }
 
     @NonNull
     @Override
     public ItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.shop_item,parent,false);
-
         ItemAdapter.ViewHolder viewHolder = new ItemAdapter.ViewHolder(view);
-
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ItemAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        TextView itemName=holder.itemName;
-        TextView itemPrice=holder.itemPrice;
-        EditText itemQuantity=holder.itemQuantity;
-        ImageView itemImage = holder.itemImage;
-        LinearLayout quantity = holder.quantity;
-        ImageButton decreaseQuantity=holder.decreaseQuantity;
-        ImageButton increaseQuantity=holder.increaseQuantity;
 
-        ItemModel item = items.get(position);
+        ItemModel item = itemList.get(position);
 
-        itemName.setText(item.getName());
-        itemPrice.setText(String.valueOf(item.getPrice()));
-        itemQuantity.setText(String.valueOf(item.getQuantity()));
-        itemImage.setImageResource(R.drawable.notebooks);
-        // change using Glide
-        itemQuantity.setText(String.valueOf(item.getQuantity()));
-
-        if(!isShopkeeper){
-            itemQuantity.setClickable(false);
-            itemQuantity.setFocusable(false);
-            itemQuantity.setVisibility(View.VISIBLE);
-            decreaseQuantity.setVisibility(View.GONE);
-            increaseQuantity.setVisibility(View.GONE);
+        holder.itemName.setText(item.getName());
+        holder.itemPrice.setText(String.valueOf(item.getPrice()));
+        holder.itemQuantity.setText(String.valueOf(item.getQuantity()));
+        if (item.imgUrl.equals("default")) {
+            holder.itemImage.setImageResource(R.drawable.notebooks);
+        } else {
+            Picasso.get().load(item.getImgUrl()).into(holder.itemImage);
         }
 
-        decreaseQuantity.setOnClickListener(new View.OnClickListener() {
+        if(!isShopkeeper){
+            holder.itemQuantity.setClickable(false);
+            holder.itemQuantity.setFocusable(false);
+            holder.itemQuantity.setVisibility(View.VISIBLE);
+            holder.decreaseQuantity.setVisibility(View.GONE);
+            holder.increaseQuantity.setVisibility(View.GONE);
+        }
+
+        holder.decreaseQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 item.setQuantity(item.getQuantity() - 1);
-                itemQuantity.setText(String.valueOf(item.getQuantity()));
+                holder.itemQuantity.setText(String.valueOf(item.getQuantity()));
             }
         });
-        increaseQuantity.setOnClickListener(new View.OnClickListener() {
+        holder.increaseQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 item.setQuantity(item.getQuantity() + 1);
-                itemQuantity.setText(String.valueOf(item.getQuantity()));
+                holder.itemQuantity.setText(String.valueOf(item.getQuantity()));
             }
         });
+
+        if (isShopkeeper || isEmployee) {
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    String itemId = itemList.get(position).getId();
+                    String categoryId = itemList.get(position).getCategoryId();
+                    String itemName = itemList.get(position).getName();
+                    builder.setTitle("Delete " + itemName + " Item");
+                    builder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            db.collection("category").document(categoryId)
+                                .collection("item").document(itemId).delete()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(v.getContext(), "Item Deleted Successfully!", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(v.getContext(), "Error! (Item Deletion)", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    builder.show();
+                    return true;
+                }
+            });
+        }
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return itemList.size();
     }
 }

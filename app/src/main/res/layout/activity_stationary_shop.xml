@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Shops.StationaryShop.HomePage.StationaryShop">
 
     <LinearLayout
@@ -56,8 +55,7 @@
                         android:adjustViewBounds="true"
                         android:cropToPadding="true"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_baseline_add_24">
-                    </ImageView>
+                        android:src="@drawable/ic_baseline_add_24" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -71,8 +69,7 @@
                     android:gravity="center_horizontal"
                     android:text="Add Category"
                     android:textColor="@color/black"
-                    android:textSize="13sp">
-                </TextView>
+                    android:textSize="13sp" />
 
             </LinearLayout>
 
@@ -80,7 +77,9 @@
                 android:id="@+id/category_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal" />
         </LinearLayout>
@@ -89,29 +88,28 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="5dp"
-            android:background="@color/LightGrey">
-        </TextView>
+            android:background="@color/LightGrey" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/item_recyclerView"
-            android:layout_gravity="center"
-
-            android:padding="15dp"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:clipToPadding="false"
-            android:layout_height="match_parent"/>
+            android:padding="15dp" />
+
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/addItemEfab"
         android:layout_width="wrap_content"
-        android:text="Add Item"
-        android:textAllCaps="false"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="25dp"
         android:backgroundTint="@android:color/white"
+        android:text="Add Item"
+        android:textAllCaps="false"
         app:backgroundTintMode="add"
         app:icon="@drawable/ic_baseline_add_24"
         app:iconTint="@android:color/black"

@@ -2,24 +2,30 @@ package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.ManageE
 
 public class EmployeeModel {
 
-    private int id;
+    private String id;
     private String name;
-    private String phoneNumber;
-    private String aadharNumber;
+    private long phoneNo;
+    private long aadharNo;
     private String email;
+    private String imgUrl;
 
-    public EmployeeModel(String name, String phoneNumber, String aadharNumber, String email) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.aadharNumber = aadharNumber;
-        this.email = email;
+    public EmployeeModel() {
     }
 
-    public int getId() {
+    public EmployeeModel(String id, String name, long phoneNo, long aadharNo, String email, String imgUrl) {
+        this.id = id;
+        this.name = name;
+        this.phoneNo = phoneNo;
+        this.aadharNo = aadharNo;
+        this.email = email;
+        this.imgUrl = imgUrl;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -31,20 +37,20 @@ public class EmployeeModel {
         this.name = name;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public long getPhoneNo() {
+        return phoneNo;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNo(long phoneNo) {
+        this.phoneNo = phoneNo;
     }
 
-    public String getAadharNumber() {
-        return aadharNumber;
+    public long getAadharNo() {
+        return aadharNo;
     }
 
-    public void setAadharNumber(String aadharNumber) {
-        this.aadharNumber = aadharNumber;
+    public void setAadharNo(long aadharNo) {
+        this.aadharNo = aadharNo;
     }
 
     public String getEmail() {
@@ -53,5 +59,13 @@ public class EmployeeModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

@@ -1,19 +1,31 @@
 package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Item;
 
 public class ItemModel {
+    String id;
     String name;
     int price;
-    String imgurl;
+    String imgUrl;
     int quantity;
+    String categoryId;
 
     public ItemModel() {
     }
 
-    public ItemModel(String name, int price, String imgurl, int quantity) {
+    public ItemModel(String id, String name, int price, String imgUrl, int quantity, String categoryId) {
+        this.id = id;
         this.name = name;
         this.price = price;
-        this.imgurl = imgurl;
+        this.imgUrl = imgUrl;
         this.quantity = quantity;
+        this.categoryId = categoryId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -32,12 +44,12 @@ public class ItemModel {
         this.price = price;
     }
 
-    public String getImgurl() {
-        return imgurl;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setImgurl(String imgurl) {
-        this.imgurl = imgurl;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public int getQuantity() {
@@ -46,5 +58,13 @@ public class ItemModel {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 }

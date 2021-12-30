@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "681587185339",
+    "project_id": "lnmiitstationary",
+    "storage_bucket": "lnmiitstationary.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681587185339:android:d8eac274d5ba6632bebb9e",
+        "android_client_info": {
+          "package_name": "com.example.lnmiitshoppingcomplex"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "681587185339-llbv27tothu36192sccfvfb1aopbe8ob.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9lKxOMv66K5nRgtP9KpXCfr0r65CQMtQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "681587185339-llbv27tothu36192sccfvfb1aopbe8ob.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

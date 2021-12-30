@@ -46,6 +46,17 @@
         <entry key="..\:/Projects/LNMIIT_Shopping_Complex/app/src/main/res/menu/home_menu.xml" value="0.25" />
         <entry key="..\:/Projects/LNMIIT_Shopping_Complex/app/src/main/res/menu/stationary_shop_nav_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/LNMIIT_Shopping_Complex/app/src/main/res/menu/stationaryshop_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/vibha/StudioProjects/LNMIIT_Shopping_Complex/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.2703125" />
+        <entry key="..\:/Users/vibha/StudioProjects/LNMIIT_Shopping_Complex/app/src/main/res/drawable/ic_baseline_perm_identity_24.xml" value="0.2703125" />
+        <entry key="..\:/Users/vibha/StudioProjects/LNMIIT_Shopping_Complex/app/src/main/res/layout/activity_about_us.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/vibha/StudioProjects/LNMIIT_Shopping_Complex/app/src/main/res/layout/activity_add_employee.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/vibha/StudioProjects/LNMIIT_Shopping_Complex/app/src/main/res/layout/activity_add_item.xml" value="0.264" />
+        <entry key="..\:/Users/vibha/StudioProjects/LNMIIT_Shopping_Complex/app/src/main/res/layout/activity_stationary_shop.xml" value="0.18931159420289856" />
+        <entry key="..\:/Users/vibha/StudioProjects/LNMIIT_Shopping_Complex/app/src/main/res/layout/add_category.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/vibha/StudioProjects/LNMIIT_Shopping_Complex/app/src/main/res/layout/category_item.xml" value="0.264" />
+        <entry key="..\:/Users/vibha/StudioProjects/LNMIIT_Shopping_Complex/app/src/main/res/layout/employee_card.xml" value="0.18931159420289856" />
+        <entry key="..\:/Users/vibha/StudioProjects/LNMIIT_Shopping_Complex/app/src/main/res/layout/employee_details_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/vibha/StudioProjects/LNMIIT_Shopping_Complex/app/src/main/res/layout/shop_item.xml" value="0.264" />
       </map>
     </option>
   </component>

@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LNMIITShoppingComplex">
         <activity
+            android:name=".Shops.StationaryShop.MenuItems.ManageEmployees.Classes.AddEmployee"
+            android:exported="false" />
+        <activity
             android:name=".Shops.StationaryShop.MenuItems.ManageEmployees.ManageEmployees"
             android:exported="false" />
         <activity
@@ -42,6 +45,9 @@
         <activity
             android:name=".Shops.StationaryShop.HomePage.AddItem.AddItem"
             android:exported="false" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
     </application>
 
 </manifest>
