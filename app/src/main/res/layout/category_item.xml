@@ -1,32 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="wrap_content"
     android:layout_width="wrap_content"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
     android:layout_marginEnd="8dp"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
-        app:cardCornerRadius="60dp"
-        app:cardElevation="1dp"
         android:clipToPadding="true"
         android:elevation="1dp"
-        app:cardBackgroundColor="@color/WhiteSmoke">
+        app:cardBackgroundColor="@color/WhiteSmoke"
+        app:cardCornerRadius="60dp"
+        app:cardElevation="1dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/c_img"
-            android:layout_margin="15dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="true"
-            android:cropToPadding="true">
-        </ImageView>
+            android:padding="5dp" />
 
     </androidx.cardview.widget.CardView>
 
@@ -34,11 +29,10 @@
         android:id="@+id/c_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:gravity="center_horizontal"
         android:text="Category 1"
-        android:textSize="13sp"
         android:textColor="@color/black"
-        android:layout_marginTop="5dp">
-    </TextView>
+        android:textSize="13sp" />
 
 </LinearLayout>

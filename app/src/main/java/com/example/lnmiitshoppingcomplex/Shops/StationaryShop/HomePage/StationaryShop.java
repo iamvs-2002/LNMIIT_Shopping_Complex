@@ -1,5 +1,7 @@
 package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.HomePage;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
@@ -9,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -33,12 +37,34 @@ import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Item.ItemM
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.HomePage.Login.LoginActivity;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.AboutUs.AboutUs;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.ManageEmployees.ManageEmployees;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class StationaryShop extends AppCompatActivity {
     private List<CategoryModel> categoryList = new ArrayList<>();
@@ -52,10 +78,21 @@ public class StationaryShop extends AppCompatActivity {
     static boolean isEmployee;
     ExtendedFloatingActionButton addItemEfab;
 
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private Uri imgUri;
+    private String dlUrl;
+    private StorageTask storageTask;
+    private StorageReference storageReference;
+    private String categoryName;
+    private MaterialEditText editText;
+    private CircleImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stationary_shop);
+
+        storageReference = FirebaseStorage.getInstance().getReference().child("category");
 
         Intent intent = getIntent();
         mode = intent.getStringExtra("mode");
@@ -69,16 +106,14 @@ public class StationaryShop extends AppCompatActivity {
 
         addCategoryLayout = findViewById(R.id.addcategory_layout);
 
-        if(mode!=null && mode.equals("s")){
+        if (mode!=null && mode.equals("s")) {
             //nav bar is visible
             isShopkeeper = true;
             addCategoryLayout.setVisibility(View.VISIBLE);
             addItemEfab.setVisibility(View.VISIBLE);
-        }
-        else if(mode!=null && mode.equals("e")){
+        } else if (mode!=null && mode.equals("e")) {
             isEmployee = true;
-        }
-        else {
+        } else {
             addCategoryLayout.setVisibility(View.GONE);
             addItemEfab.setVisibility(View.GONE);
         }
@@ -98,7 +133,7 @@ public class StationaryShop extends AppCompatActivity {
 
         // Category
         RecyclerView category_recyclerView = findViewById(R.id.category_recyclerView);
-        categoryAdapter = new CategoryAdapter(this, categoryList);
+        categoryAdapter = new CategoryAdapter(this, categoryList, mode);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         category_recyclerView.setLayoutManager(mLayoutManager);
@@ -108,7 +143,6 @@ public class StationaryShop extends AppCompatActivity {
         categoryAdapter.setOnItemClickListener(new CategoryAdapter.onRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(StationaryShop.this, "Hello"+position, Toast.LENGTH_SHORT).show();
                 showItems(position);
             }
         });
@@ -130,63 +164,175 @@ public class StationaryShop extends AppCompatActivity {
         builder.setView(customLayout);
         builder.setCancelable(false);
 
-        ImageView imageView = customLayout.findViewById(R.id.addCategoryImg);
-        MaterialEditText editText = customLayout.findViewById(R.id.categoryNameMet);
-        ImageButton savebtn = customLayout.findViewById(R.id.saveCategoryBtn);
-        ImageButton closebtn = customLayout.findViewById(R.id.dialog_cancel_btn);
+        imageView = customLayout.findViewById(R.id.addCategoryImg);
+        editText = customLayout.findViewById(R.id.categoryNameMet);
+        ImageButton saveBtn = customLayout.findViewById(R.id.saveCategoryBtn);
+        ImageButton closeBtn = customLayout.findViewById(R.id.dialog_cancel_btn);
 
         // create and show the alert dialog
         AlertDialog dialog = builder.create();
-        savebtn.setOnClickListener(new View.OnClickListener() {
+        saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(StationaryShop.this, "Saved!", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                if(Objects.requireNonNull(editText.getText()).toString().equals("")) {
+                    Toast.makeText(StationaryShop.this, "Category Name cannot be empty!", Toast.LENGTH_SHORT).show();
+                } else {
+                    categoryName = editText.getText().toString();
+                    addCategory();
+                    dialog.dismiss();
+                }
             }
         });
-        closebtn.setOnClickListener(new View.OnClickListener() {
+        
+        closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
             }
         });
         dialog.show();
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                categoryName = editText.getText().toString();
+
+                CropImage.activity().setCropShape(CropImageView.CropShape.OVAL).setAspectRatio(1, 1)
+                        .start(StationaryShop.this);
+            }
+        });
+    }
+
+    private void addCategory() {
+
+        HashMap<String, Object> category = new HashMap<>();
+        category.put("name", categoryName);
+        if (dlUrl == null || dlUrl.equals("")) {
+            category.put("imgUrl", "default");
+        } else {
+            category.put("imgUrl", dlUrl);
+        }
+
+        db.collection("category").document().set(category)
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(StationaryShop.this, "Category Added Successfully!", Toast.LENGTH_SHORT).show();
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(StationaryShop.this, "Error! (Category Addition Failed)", Toast.LENGTH_SHORT).show();
+                }
+            });
     }
 
     private void prepareCategories() {
         // To be fetched from database
-        CategoryModel category1 = new CategoryModel("Papers",R.drawable.papers);
-        CategoryModel category2 = new CategoryModel("Notebooks",R.drawable.notebooks);
-        CategoryModel category3 = new CategoryModel("Pencils",R.drawable.pencils);
-        CategoryModel category4 = new CategoryModel("Pens",R.drawable.pens);
-        CategoryModel category5 = new CategoryModel("Colors",R.drawable.colorsa);
-        CategoryModel category6 = new CategoryModel("Paints",R.drawable.colorsb);
+        db.collection("category")
+            .orderBy("name")
+            .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                    if (value != null) {
+                        categoryList.clear();
+                        for (DocumentSnapshot documentSnapshot: value) {
+                            CategoryModel category = documentSnapshot.toObject(CategoryModel.class);
+                            if (category != null) {
+                                category.setId(documentSnapshot.getId());
+                                categoryList.add(category);
+                            }
+                        }
+                        categoryAdapter.notifyDataSetChanged();
+                    }
+                }
+            });
+    }
 
-        categoryList = Arrays.asList(category1,category2,category3,category4,category5,category6);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (result != null) {
+                imgUri = result.getUri();
+                uploadImage();
+            }
+
+            editText.setText(categoryName);
+        } else {
+            Toast.makeText(this, "Something went wrong :(", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void uploadImage() {
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Uploading");
+        progressDialog.show();
+
+        if (imgUri != null) {
+            StorageReference fileRef = storageReference.child(System.currentTimeMillis() + ".jpeg");
+            storageTask = fileRef.putFile(imgUri);
+            storageTask.continueWithTask(new Continuation() {
+                @Override
+                public Object then(@NonNull Task task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    return fileRef.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        dlUrl = task.getResult().toString();
+
+                        progressDialog.dismiss();
+
+                        if (dlUrl != null && !dlUrl.equals("")) {
+                            Picasso.get().load(dlUrl).into(imageView);
+                        }
+                    } else {
+                        Toast.makeText(StationaryShop.this, "Error! (Uploading Image)", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }
+            });
+        } else {
+            Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private void showItems(int position) {
-        Log.d("XYZ","error");
-        ItemModel i1 = new ItemModel("Classmate",30,"url",23);
-        ItemModel i2 = new ItemModel("PaperGrid",30,"url",12);
-        ItemModel i3 = new ItemModel("Classmate",30,"url",11);
-        ItemModel i4 = new ItemModel("Factor Notes",30,"url",33);
-        ItemModel i5 = new ItemModel("Classmate",30,"url",15);
-        ItemModel i6 = new ItemModel("Classmate",30,"url",12);
-        ItemModel i7 = new ItemModel("PaperMate",30,"url",46);
-        ItemModel i8 = new ItemModel("Luxor",30,"url",23);
-        ItemModel i9 = new ItemModel("Classmate",30,"url",43);
-        ItemModel i10 = new ItemModel("Luxor",30,"url",22);
-        ItemModel i11 = new ItemModel("PaperGrid",30,"url",10);
-        ItemModel i12 = new ItemModel("Reynolds",30,"url",5);
-        ItemModel i13 = new ItemModel("Classmate",30,"url",75);
-        ItemModel i14 = new ItemModel("Unigo",30,"url",66);
-        ItemModel i15 = new ItemModel("Classmate",30,"url",23);
 
-        itemList = Arrays.asList(i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15);
-        itemAdapter.setItems(itemList);
-        itemAdapter.notifyDataSetChanged();
+        String categoryId = categoryList.get(position).getId();
+        db.collection("category").document(categoryId)
+            .collection("item")
+            .orderBy("name")
+            .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                    if (value != null) {
+                        itemList.clear();
+                        for(DocumentSnapshot documentSnapshot: value) {
+                            ItemModel item = new ItemModel();
+                            item.setId(documentSnapshot.getId());
+                            item.setName(documentSnapshot.get("name").toString());
+                            item.setPrice(Integer.parseInt(documentSnapshot.get("price").toString()));
+                            item.setQuantity(Integer.parseInt(documentSnapshot.get("quantity").toString()));
+                            item.setImgUrl(documentSnapshot.get("imgUrl").toString());
+                            item.setCategoryId(documentSnapshot.get("categoryId").toString());
+
+                            itemList.add(item);
+                        }
+                        itemAdapter.notifyDataSetChanged();
+                    }
+                }
+            });
     }
 
     public boolean onPrepareOptionsMenu(Menu menu) {

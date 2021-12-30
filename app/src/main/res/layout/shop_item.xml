@@ -1,114 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    android:layout_width="180dp"
-    android:clipToPadding="false"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="30dp"
+    android:layout_width="180dp"
     android:layout_height="wrap_content"
+    android:clipToPadding="false"
     app:cardBackgroundColor="@color/WhiteSmoke"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    app:cardCornerRadius="30dp">
+
     <LinearLayout
-        android:padding="10dp"
-        android:gravity="center"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp">
+
         <ImageView
             android:id="@+id/citem_img"
             android:layout_width="140dp"
             android:layout_height="140dp"
+            android:padding="5dp"
             android:scaleType="fitXY"
-            android:padding="10dp"
-            android:src="@drawable/notebooks">
-        </ImageView>
-        <TextView
+            android:src="@drawable/notebooks" />
+
+        <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/LightGrey">
-        </TextView>
+            android:background="@color/LightGrey" />
 
         <LinearLayout
             android:id="@+id/stationary_item_quantity_layout"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_height="wrap_content">
+            android:gravity="center">
+
             <ImageButton
                 android:id="@+id/citem_quantity_decrease"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ic_baseline_arrow_left_24"
+                android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:layout_height="wrap_content">
-            </ImageButton>
+                android:src="@drawable/ic_baseline_arrow_left_24" />
+
             <EditText
                 android:id="@+id/citem_quantity"
                 android:layout_width="wrap_content"
-                android:paddingLeft="20dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:paddingRight="20dp"
-                android:textSize="12sp"
-                android:background="@color/White"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
                 android:layout_height="wrap_content"
-                android:text="20">
-            </EditText>
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/White"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="5dp"
+                android:textSize="12sp" />
+
             <ImageButton
                 android:id="@+id/citem_quantity_increase"
-                android:src="@drawable/ic_baseline_arrow_right_24"
-                android:background="@android:color/transparent"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </ImageButton>
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_baseline_arrow_right_24" />
+
         </LinearLayout>
-        <TextView
+
+        <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/LightGrey">
-        </TextView>
+            android:background="@color/LightGrey" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="2dp"
+            android:gravity="center"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/citem_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
                 android:layout_gravity="center"
                 android:maxLength="10"
-                android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="15sp">
-            </TextView>
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
             <View
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="0dp">
-            </View>
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rs. "
                 android:textColor="@color/black"
-                android:textSize="15sp">
-            </TextView>
+                android:textSize="15sp" />
+
             <TextView
                 android:id="@+id/citem_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4"
                 android:textColor="@color/black"
-                android:textSize="15sp">
-            </TextView>
+                android:textSize="15sp" />
+
         </LinearLayout>
 
     </LinearLayout>

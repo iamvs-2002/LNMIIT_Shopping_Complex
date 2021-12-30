@@ -7,11 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.lnmiitshoppingcomplex.R;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.ManageEmployees.Classes.EmployeeModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -40,10 +40,14 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     }
     @Override
     public void onBindViewHolder(EmployeeAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        EmployeeModel e = employeeList.get(position);
-        holder.name.setText(e.getName());
-        holder.phone.setText(e.getPhonenum());
-        holder.image.setImageResource(R.drawable.ic_baseline_perm_identity_24);
+        EmployeeModel employee = employeeList.get(position);
+        holder.name.setText(employee.getName());
+        holder.phone.setText(String.valueOf(employee.getPhoneNo()));
+        if (employee.getImgUrl().equals("default")) {
+            holder.image.setImageResource(R.drawable.ic_baseline_perm_identity_24);
+        } else {
+            Picasso.get().load(employee.getImgUrl()).into(holder.image);
+        }
     }
     @Override
     public int getItemCount() {

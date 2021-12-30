@@ -22,10 +22,10 @@
             app:cardElevation="0dp">
 
             <ImageView
-                android:id="@+id/addMenuItemImg"
+                android:id="@+id/addEmployeeImg"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:src="@drawable/ic_baseline_edit_24" />
+                android:src="@drawable/ic_baseline_perm_identity_24" />
 
         </androidx.cardview.widget.CardView>
 
@@ -33,11 +33,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="(Click the icon above to add image of item)"
+            android:text="(Click the icon above to add picture of employee)"
             android:textColor="@android:color/darker_gray" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/itemNameMet"
+            android:id="@+id/employeeNameMet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -52,11 +52,11 @@
             app:met_textColor="@android:color/black" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/itemPriceMet"
+            android:id="@+id/employeePhoneMet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="Price*"
+            android:hint="Phone No.*"
             android:inputType="number"
             android:textSize="15sp"
             app:met_baseColor="@android:color/black"
@@ -66,11 +66,11 @@
             app:met_textColor="@android:color/black" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/itemQuantityMet"
+            android:id="@+id/employeeAadharMet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="Quantity*"
+            android:hint="Aadhar No.*"
             android:inputType="number"
             android:maxLines="1"
             android:textSize="15sp"
@@ -80,26 +80,25 @@
             app:met_primaryColor="@android:color/black"
             app:met_textColor="@android:color/black" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginTop="15sp"
-            android:text="Category*"
-            android:textColor="@color/Gray"
-            android:textSize="12sp" />
-
-        <Spinner
-            android:id="@+id/itemCategorySpinner"
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/employeeEmailMet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:hint="Email*"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="15sp"
+            app:met_baseColor="@android:color/black"
+            app:met_errorColor="@android:color/holo_red_light"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@android:color/black"
+            app:met_textColor="@android:color/black" />
 
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/saveItemEfab"
+        android:id="@+id/saveEmployeeEFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -112,4 +111,5 @@
         app:rippleColor="@android:color/holo_green_light"
         app:strokeColor="@android:color/black"
         app:strokeWidth="1dp" />
+
 </RelativeLayout>
