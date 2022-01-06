@@ -15,6 +15,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lnmiitshoppingcomplex.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -86,8 +89,23 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         shopkeeperName.setText(shop.getShopkeeperName());
         timing.setText(String.format("%s - %s", shop.startTime, shop.endTime));
 
+        //comparison
         String temp = shop.status ? "Open" : "Closed";
         status.setText(temp);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
+        db.collection("setting").document("settings")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot!=null){
+                            String temp = (Boolean) documentSnapshot.get("shopstatus") ? "Open" : "Closed";
+                            status.setText(temp);
+                        }
+                    }
+                });
 
         shopCard.setCardBackgroundColor(shop.getColor());
 

@@ -63,6 +63,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -336,6 +337,8 @@ public class StationaryShop extends AppCompatActivity {
             });
     }
 
+    private boolean isChecked = false;
+
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem shopkeeper_login = menu.findItem(R.id.stationaryshop_login);
         MenuItem shopkeeper_logout = menu.findItem(R.id.stationaryshop_shopkeeper_logout);
@@ -357,6 +360,20 @@ public class StationaryShop extends AppCompatActivity {
             shopkeeper_login.setVisible(true);
             shopkeeper_logout.setVisible(false);
         }
+
+        MenuItem checkable = menu.findItem(R.id.stationaryshop_manage_time);
+        db.collection("setting").document("settings")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot!=null){
+
+                            checkable.setChecked((Boolean) documentSnapshot.get("shopstatus"));
+                        }
+                    }
+                });
+
         return true;
     }
 
@@ -386,6 +403,28 @@ public class StationaryShop extends AppCompatActivity {
                 return true;
             case R.id.stationaryshop_about_us:
                 startActivity(new Intent(StationaryShop.this, AboutUs.class));
+                //Toast.makeText(getApplicationContext(),"About Us",Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.stationaryshop_manage_time:
+                isChecked = !item.isChecked();
+                Map<String, Object> shopstatus = new HashMap<>();
+                shopstatus.put("shopstatus", isChecked);
+
+                String status = isChecked?"Open":"Closed";
+                db.collection("setting").document("settings").update(shopstatus)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(getApplicationContext(), "Shop status set to "+status, Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "Error! Please try again later.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                item.setChecked(isChecked);
                 //Toast.makeText(getApplicationContext(),"About Us",Toast.LENGTH_LONG).show();
                 return true;
             case R.id.stationaryshop_photostat:

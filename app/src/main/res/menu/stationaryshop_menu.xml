@@ -11,6 +11,13 @@
 
     <group
         android:id="@+id/stationaryshop_shopkeeper_menu_grp">
+
+        <item
+            android:id="@+id/stationaryshop_manage_time"
+            android:icon="@drawable/ic_baseline_access_time_24"
+            android:checkable="true"
+            android:title="Shop Open" />
+
         <item
             android:id="@+id/stationaryshop_manage_employees"
             android:icon="@drawable/ic_baseline_supervisor_account_24"

@@ -94,14 +94,12 @@ public class PhotoStatActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "Kindly attach the documents.", Toast.LENGTH_SHORT).show();
 
-                String email = "iamvs2002@gmail.com";
-                String subject = "Documents for print";
-                String body = "Kindly print these documents. I will collect them soon.";
+                String email = "elonmuskistheking@gmail.com";
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
                 emailIntent.setData(Uri.parse("mailto:" + email));
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-                emailIntent.putExtra(Intent.EXTRA_TEXT, body);
-                startActivity(Intent.createChooser(emailIntent, "Send using..."));
+                // emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+                // emailIntent.putExtra(Intent.EXTRA_TEXT, body);
+                startActivity(Intent.createChooser(emailIntent, "Send e-mail using..."));
             }
         });
     }

@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import com.example.lnmiitshoppingcomplex.R;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.HomePage.StationaryShop;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,10 +38,11 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.mytoolbar);
         setSupportActionBar(toolbar);
 
+
         List<ShopModel> shops = new ArrayList<>();
         ShopModel s1 = new ShopModel("Grocery and Fruit shop","08:00","22:00","Shopkeeper Name", Color.parseColor("#FF6347"));
         ShopModel s2 = new ShopModel("Barber shop","08:00","22:00","Shopkeeper Name", Color.parseColor("#FF018786"));
-        ShopModel s3 = new ShopModel("Stationary and Photostat shop","08:00","22:00","Shopkeeper Name", Color.parseColor("#C71585"));
+        ShopModel s3 = new ShopModel("Stationary and Photostat shop", "08:00", "22:00","Shopkeeper Name", Color.parseColor("#C71585"));
         ShopModel s4 = new ShopModel("Snacks and Tea Shop","08:00","22:00","Shopkeeper Name", Color.parseColor("#228B22"));
         ShopModel s5 = new ShopModel("Amul Dairy and Beverages shop","08:00","22:00","Shopkeeper Name", Color.parseColor("#BA55D3"));
         ShopModel s6 = new ShopModel("Laundry Shop","08:00","22:00","Shopkeeper Name", Color.parseColor("#00008B"));
@@ -78,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
         shopListView.setAdapter(adapter);
     }
     @SuppressLint("RestrictedApi")
@@ -97,7 +100,9 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.refresh:
-                Toast.makeText(getApplicationContext(),"Refresh Selected",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
+                finishAffinity();
                 return true;
             case R.id.settings:
                 Toast.makeText(getApplicationContext(),"Settings Selected",Toast.LENGTH_LONG).show();
