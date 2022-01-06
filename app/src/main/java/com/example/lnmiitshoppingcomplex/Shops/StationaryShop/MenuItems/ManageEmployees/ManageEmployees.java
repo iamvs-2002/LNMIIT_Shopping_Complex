@@ -3,6 +3,7 @@ package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.ManageE
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +36,7 @@ public class ManageEmployees extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    Toolbar toolbar;
     RecyclerView manageEmployeesRv;
     EmployeeAdapter employeeAdapter;
     List<EmployeeModel> employeeList;
@@ -45,6 +47,10 @@ public class ManageEmployees extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_employees);
+
+        toolbar = findViewById(R.id.mytoolbar);
+        toolbar.setTitle("Manage Employees");
+        setSupportActionBar(toolbar);
 
         addEmployeeEFab = findViewById(R.id.addEmployeeEfab);
         addEmployeeEFab.setOnClickListener(new View.OnClickListener() {

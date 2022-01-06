@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(loginIntent);
                     finish();
                 }
-                if(user.equals("root") && pass.equals("root")){
+                else if(user.equals("root") && pass.equals("root")){
                     //login
                     Intent loginIntent = new Intent(LoginActivity.this, StationaryShop.class);
                     loginIntent.putExtra("mode","e");

@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LNMIITShoppingComplex">
         <activity
+            android:name=".Shops.StationaryShop.MenuItems.PhotoStat.PhotoStatActivity"
+            android:exported="false" />
+        <activity
             android:name=".Shops.StationaryShop.MenuItems.ManageEmployees.Classes.AddEmployee"
             android:exported="false" />
         <activity

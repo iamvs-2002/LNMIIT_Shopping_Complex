@@ -37,6 +37,7 @@ import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Item.ItemM
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.HomePage.Login.LoginActivity;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.AboutUs.AboutUs;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.ManageEmployees.ManageEmployees;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.PhotoStat.PhotoStatActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -385,6 +386,13 @@ public class StationaryShop extends AppCompatActivity {
                 return true;
             case R.id.stationaryshop_about_us:
                 startActivity(new Intent(StationaryShop.this, AboutUs.class));
+                //Toast.makeText(getApplicationContext(),"About Us",Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.stationaryshop_photostat:
+                Intent i = new Intent(StationaryShop.this, PhotoStatActivity.class);
+                i.putExtra("mode", mode);
+                startActivity(i);
+
                 //Toast.makeText(getApplicationContext(),"About Us",Toast.LENGTH_LONG).show();
                 return true;
             case R.id.stationaryshop_shopkeeper_logout:

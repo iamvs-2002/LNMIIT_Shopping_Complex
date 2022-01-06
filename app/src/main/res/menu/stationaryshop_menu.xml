@@ -19,6 +19,11 @@
     </group>
 
     <item
+        android:id="@+id/stationaryshop_photostat"
+        android:icon="@drawable/ic_baseline_attach_file_24"
+        android:title="Photostat" />
+
+    <item
         android:id="@+id/stationaryshop_about_us"
         android:icon="@drawable/ic_baseline_wb_incandescent_24"
         android:title="About Us" />
