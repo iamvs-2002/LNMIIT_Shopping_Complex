@@ -1,5 +1,6 @@
 package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.MenuItems.PhotoStat;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -14,9 +15,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lnmiitshoppingcomplex.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class PhotoStatActivity extends AppCompatActivity {
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     Toolbar toolbar;
     String mode;
@@ -39,6 +48,8 @@ public class PhotoStatActivity extends AppCompatActivity {
         bnw = findViewById(R.id.blackandwhite_EditText);
         c = findViewById(R.id.colored_EditText);
         saverate = findViewById(R.id.save_rate_btn);
+
+        loadRates();
 
         if(mode!=null && mode.equals("s")) //shopkeeper
         {
@@ -84,7 +95,28 @@ public class PhotoStatActivity extends AppCompatActivity {
                 String bnwrate = bnw.getText().toString();
                 String crate = c.getText().toString();
 
-                Toast.makeText(getApplicationContext(), "Changes saved successfully.", Toast.LENGTH_SHORT).show();
+                if (bnwrate.equals("") || crate.equals("")) {
+                    Toast.makeText(PhotoStatActivity.this, "Rates cannot be empty!", Toast.LENGTH_SHORT).show();
+                } else {
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("bnwrate", bnwrate);
+                    map.put("crate", crate);
+                    db.collection("setting").document("settings")
+                        .set(map)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(getApplicationContext(), "Changes saved Successfully!", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(), "Error! (Saving Photostat rates)", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    finish();
+                }
             }
         });
 
@@ -104,5 +136,18 @@ public class PhotoStatActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(emailIntent, "Send using..."));
             }
         });
+    }
+
+    private void loadRates() {
+        db.collection("setting").document("settings").get()
+            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot != null) {
+                        bnw.setText(documentSnapshot.get("bnwrate").toString());
+                        c.setText(documentSnapshot.get("crate").toString());
+                    }
+                }
+            });
     }
 }

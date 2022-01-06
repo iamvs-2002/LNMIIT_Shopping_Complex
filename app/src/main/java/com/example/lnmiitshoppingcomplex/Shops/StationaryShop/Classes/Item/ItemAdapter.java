@@ -91,18 +91,38 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             holder.increaseQuantity.setVisibility(View.GONE);
         }
 
+        String itemId = itemList.get(position).getId();
+        String categoryId = itemList.get(position).getCategoryId();
+
         holder.decreaseQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                item.setQuantity(item.getQuantity() - 1);
-                holder.itemQuantity.setText(String.valueOf(item.getQuantity()));
+                if (item.getQuantity() > 0 ) {
+                    db.collection("category").document(categoryId)
+                        .collection("item").document(itemId)
+                        .update("quantity", item.getQuantity()-1)
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(view.getContext(), "Error! (Item Quantity Updation)", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                }
             }
         });
+
         holder.increaseQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                item.setQuantity(item.getQuantity() + 1);
-                holder.itemQuantity.setText(String.valueOf(item.getQuantity()));
+                db.collection("category").document(categoryId)
+                    .collection("item").document(itemId)
+                    .update("quantity", item.getQuantity()+1)
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(view.getContext(), "Error! (Item Quantity Updation)", Toast.LENGTH_SHORT).show();
+                        }
+                    });
             }
         });
 
@@ -111,8 +131,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                 @Override
                 public boolean onLongClick(View v) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                    String itemId = itemList.get(position).getId();
-                    String categoryId = itemList.get(position).getCategoryId();
                     String itemName = itemList.get(position).getName();
                     builder.setTitle("Delete " + itemName + " Item");
                     builder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
