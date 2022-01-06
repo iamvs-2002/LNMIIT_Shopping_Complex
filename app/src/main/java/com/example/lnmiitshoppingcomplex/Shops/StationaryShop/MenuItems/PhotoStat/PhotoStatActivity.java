@@ -6,7 +6,10 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,8 +20,9 @@ public class PhotoStatActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     String mode;
-    ExtendedFloatingActionButton setting_fab;
     TextView sendDoctoEmai_TV;
+    EditText bnw, c;
+    Button saverate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,21 +35,58 @@ public class PhotoStatActivity extends AppCompatActivity {
 
         mode = getIntent().getStringExtra("mode");
 
-        setting_fab = findViewById(R.id.settingsEfab);
         sendDoctoEmai_TV = findViewById(R.id.sendDocumentToEmail);
+        bnw = findViewById(R.id.blackandwhite_EditText);
+        c = findViewById(R.id.colored_EditText);
+        saverate = findViewById(R.id.save_rate_btn);
 
         if(mode!=null && mode.equals("s")) //shopkeeper
         {
-            setting_fab.setVisibility(View.VISIBLE);
+            bnw.setFocusable(true);
+            bnw.setFocusableInTouchMode(true);
+            bnw.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            bnw.setEnabled(true);
+            c.setFocusable(true);
+            c.setFocusableInTouchMode(true);
+            c.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            c.setEnabled(true);
+            saverate.setVisibility(View.VISIBLE);
+
         }
         else if(mode!=null && mode.equals("e")) //employee
         {
-            setting_fab.setVisibility(View.VISIBLE);
+            bnw.setFocusable(true);
+            bnw.setFocusableInTouchMode(true);
+            bnw.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            bnw.setEnabled(true);
+            c.setFocusable(true);
+            c.setFocusableInTouchMode(true);
+            c.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            c.setEnabled(true);
+            saverate.setVisibility(View.VISIBLE);
         }
         else
         {
-            setting_fab.setVisibility(View.INVISIBLE);
+            bnw.setFocusable(false);
+            bnw.setFocusableInTouchMode(false);
+            bnw.setInputType(InputType.TYPE_NULL);
+            bnw.setEnabled(false);
+            c.setFocusable(false);
+            c.setFocusableInTouchMode(false);
+            c.setInputType(InputType.TYPE_NULL);
+            c.setEnabled(false);
+            saverate.setVisibility(View.INVISIBLE);
         }
+
+        saverate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String bnwrate = bnw.getText().toString();
+                String crate = c.getText().toString();
+
+                Toast.makeText(getApplicationContext(), "Changes saved successfully.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         sendDoctoEmai_TV.setOnClickListener(new View.OnClickListener() {
             @Override

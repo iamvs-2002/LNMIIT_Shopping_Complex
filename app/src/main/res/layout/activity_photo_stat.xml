@@ -23,23 +23,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/settingsEfab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="25dp"
-        android:backgroundTint="@android:color/white"
-        android:text="Settings"
-        android:textAllCaps="false"
-        app:backgroundTintMode="add"
-        app:icon="@drawable/ic_baseline_settings_24"
-        app:iconTint="@android:color/black"
-        app:rippleColor="@android:color/holo_orange_light"
-        app:strokeColor="@android:color/black"
-        app:strokeWidth="1dp" />
-
     <LinearLayout
         android:gravity="center"
         android:layout_marginTop="30dp"
@@ -125,7 +108,25 @@
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rs. 1 per page">
+                android:text="Rs. ">
+            </TextView>
+            <EditText
+                android:hint="1"
+                android:background="@android:color/transparent"
+                android:id="@+id/blackandwhite_EditText"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1">
+            </EditText>
+            <TextView
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" per page">
             </TextView>
         </LinearLayout>
 
@@ -150,9 +151,36 @@
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rs. 5 per page">
+                android:text="Rs. ">
+            </TextView>
+            <EditText
+                android:hint="5"
+                android:background="@android:color/transparent"
+                android:id="@+id/colored_EditText"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5">
+            </EditText>
+            <TextView
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" per page">
             </TextView>
         </LinearLayout>
-
+        <Button
+            android:id="@+id/save_rate_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Save"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/Black">
+        </Button>
     </LinearLayout>
 </RelativeLayout>
