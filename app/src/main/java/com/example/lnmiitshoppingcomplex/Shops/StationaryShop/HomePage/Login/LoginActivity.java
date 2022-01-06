@@ -1,5 +1,6 @@
 package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.HomePage.Login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
@@ -13,17 +14,25 @@ import android.widget.Toast;
 
 import com.example.lnmiitshoppingcomplex.R;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.HomePage.StationaryShop;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
     Toolbar toolbar;
     private AppCompatButton login;
-    private EditText username, password;
+    private EditText username, passwords;
     private ProgressBar progressBar;
 
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        mAuth = FirebaseAuth.getInstance();
 
         toolbar = findViewById(R.id.mytoolbar);
         toolbar.setTitle("Login");
@@ -31,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
         login = findViewById(R.id.STATIONARYSHOP_LOGIN_BTN);
         username = findViewById(R.id.STATIONARYSHOP_USERNAME);
-        password = findViewById(R.id.STATIONARYSHOP_PASSWORD);
+        passwords = findViewById(R.id.STATIONARYSHOP_PASSWORD);
         progressBar = findViewById(R.id.STATIONARYSHOP_LOGIN_PROGRESS);
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -40,32 +49,41 @@ public class LoginActivity extends AppCompatActivity {
                 progressBar = new ProgressBar(LoginActivity.this);
                 login.setClickable(false);
                 username.setClickable(false);
-                password.setClickable(false);
+                passwords.setClickable(false);
                 progressBar.setVisibility(View.VISIBLE);
-                String user = username.getText().toString();
-                String pass = password.getText().toString();
+                String email = username.getText().toString();
+                String password = passwords.getText().toString();
 
-                if(user.equals("admin") && pass.equals("admin")){
-                    //login
-                    Intent loginIntent = new Intent(LoginActivity.this, StationaryShop.class);
-                    loginIntent.putExtra("mode","s");
-                    startActivity(loginIntent);
-                    finish();
-                }
-                else if(user.equals("root") && pass.equals("root")){
-                    //login
-                    Intent loginIntent = new Intent(LoginActivity.this, StationaryShop.class);
-                    loginIntent.putExtra("mode","e");
-                    startActivity(loginIntent);
-                    finish();
-                }
-                else{
-                    Toast.makeText(LoginActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
-                    login.setClickable(true);
-                    username.setClickable(true);
-                    password.setClickable(true);
-                    progressBar.setVisibility(View.INVISIBLE);
-                }
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getApplicationContext(), "Successfully in successfully!", Toast.LENGTH_SHORT).show();
+                                    String mode = "s";
+                                    if(email.equals("admin@gmail.com") && password.equals("admin123")){
+                                        //login
+                                        mode = "s";
+                                    }
+                                    else if(email.equals("root@gmail.com") && password.equals("root123")){
+                                        //login
+                                        mode = "e";
+
+                                    }
+                                    Intent loginIntent = new Intent(LoginActivity.this, StationaryShop.class);
+                                    loginIntent.putExtra("mode",mode);
+                                    startActivity(loginIntent);
+                                    finish();
+                                }
+                                else{
+                                    Toast.makeText(LoginActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+                                    login.setClickable(true);
+                                    username.setClickable(true);
+                                    passwords.setClickable(true);
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                        });
             }
         });
     }

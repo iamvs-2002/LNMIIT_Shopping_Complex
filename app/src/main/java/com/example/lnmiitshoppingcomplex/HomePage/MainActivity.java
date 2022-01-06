@@ -11,8 +11,11 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.lnmiitshoppingcomplex.R;
+import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.HomePage.Login.LoginActivity;
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.HomePage.StationaryShop;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -30,10 +33,15 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     private RecyclerView shopListView;
 
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAuth = FirebaseAuth.getInstance();
+
 
         toolbar = findViewById(R.id.mytoolbar);
         setSupportActionBar(toolbar);
@@ -65,7 +73,20 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 2 : //Toast.makeText(MainActivity.this, "Shop3", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(MainActivity.this, StationaryShop.class));
+                        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+                        String m = null;
+                        if(currentUser != null){
+                            String mode = currentUser.getEmail();
+                            if(mode.equals("admin@gmail.com"))
+                                m = "s";
+                            else if(mode.equals("root@gmail.com"))
+                                m = "e";
+
+                        }
+                        Intent loginIntent = new Intent(getApplicationContext(), StationaryShop.class);
+                        loginIntent.putExtra("mode",m);
+                        startActivity(loginIntent);
                         break;
 
                     case 3 : Toast.makeText(MainActivity.this, "Shop4", Toast.LENGTH_SHORT).show();

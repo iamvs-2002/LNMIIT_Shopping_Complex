@@ -89,9 +89,6 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         shopkeeperName.setText(shop.getShopkeeperName());
         timing.setText(String.format("%s - %s", shop.startTime, shop.endTime));
 
-        //comparison
-        String temp = shop.status ? "Open" : "Closed";
-        status.setText(temp);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db = FirebaseFirestore.getInstance();

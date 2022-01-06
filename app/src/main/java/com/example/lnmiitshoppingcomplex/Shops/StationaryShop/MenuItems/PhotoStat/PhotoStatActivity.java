@@ -102,7 +102,7 @@ public class PhotoStatActivity extends AppCompatActivity {
                     map.put("bnwrate", bnwrate);
                     map.put("crate", crate);
                     db.collection("setting").document("settings")
-                        .set(map)
+                        .update(map)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
@@ -115,7 +115,6 @@ public class PhotoStatActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Error! (Saving Photostat rates)", Toast.LENGTH_SHORT).show();
                             }
                         });
-                    finish();
                 }
             }
         });
