@@ -8,25 +8,18 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import com.example.lnmiitshoppingcomplex.Shops.StationaryShop.HomePage.AddItem.AddItem;
 import com.example.lnmiitshoppingcomplex.HomePage.MainActivity;
 import com.example.lnmiitshoppingcomplex.R;
@@ -44,12 +37,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -58,14 +49,11 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class StationaryShop extends AppCompatActivity {
@@ -182,6 +170,7 @@ public class StationaryShop extends AppCompatActivity {
                     categoryName = editText.getText().toString();
                     addCategory();
                     dialog.dismiss();
+                    dlUrl = null;
                 }
             }
         });
@@ -206,7 +195,6 @@ public class StationaryShop extends AppCompatActivity {
     }
 
     private void addCategory() {
-
         HashMap<String, Object> category = new HashMap<>();
         category.put("name", categoryName);
         if (dlUrl == null || dlUrl.equals("")) {
@@ -394,12 +382,10 @@ public class StationaryShop extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.stationaryshop_login:
-                //Toast.makeText(getApplicationContext(),"Refresh Selected",Toast.LENGTH_LONG).show();
                 startActivity(new Intent(StationaryShop.this, LoginActivity.class));
                 return true;
             case R.id.stationaryshop_manage_employees:
                 startActivity(new Intent(StationaryShop.this, ManageEmployees.class));
-                //Toast.makeText(getApplicationContext(),"Manage Employees",Toast.LENGTH_LONG).show();
                 return true;
             case R.id.stationaryshop_about_us:
                 startActivity(new Intent(StationaryShop.this, AboutUs.class));
@@ -431,8 +417,6 @@ public class StationaryShop extends AppCompatActivity {
                 Intent i = new Intent(StationaryShop.this, PhotoStatActivity.class);
                 i.putExtra("mode", mode);
                 startActivity(i);
-
-                //Toast.makeText(getApplicationContext(),"About Us",Toast.LENGTH_LONG).show();
                 return true;
             case R.id.stationaryshop_shopkeeper_logout:
                 startActivity(new Intent(StationaryShop.this, StationaryShop.class));

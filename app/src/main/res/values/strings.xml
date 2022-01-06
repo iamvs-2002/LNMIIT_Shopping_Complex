@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">LNMIIT Shopping Complex</string>
+    <string name="shopkeeper_name">ShopKeeperName</string>
+
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>
     <string name="start">GOT IT</string>
