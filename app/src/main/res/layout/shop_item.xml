@@ -15,15 +15,21 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-        <ImageView
-            android:id="@+id/citem_img"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:padding="5dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/notebooks" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardElevation="0dp">
+            <ImageView
+                android:id="@+id/citem_img"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:src="@drawable/notebooks" />
+        </androidx.cardview.widget.CardView>
 
         <View
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/LightGrey" />
@@ -106,6 +112,8 @@
 
             <TextView
                 android:id="@+id/citem_price"
+                android:backgroundTint="@android:color/transparent"
+                android:hint="10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"

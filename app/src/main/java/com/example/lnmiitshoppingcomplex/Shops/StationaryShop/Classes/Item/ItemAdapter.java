@@ -3,6 +3,9 @@ package com.example.lnmiitshoppingcomplex.Shops.StationaryShop.Classes.Item;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,6 +91,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             holder.itemQuantity.setClickable(true);
             holder.itemQuantity.setFocusable(true);
             holder.itemQuantity.setVisibility(View.VISIBLE);
+            holder.itemPrice.setClickable(true);
+            holder.itemPrice.setFocusable(true);
+            holder.itemPrice.setVisibility(View.VISIBLE);
             holder.decreaseQuantity.setVisibility(View.VISIBLE);
             holder.increaseQuantity.setVisibility(View.VISIBLE);
         }
@@ -95,12 +101,106 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             holder.itemQuantity.setClickable(false);
             holder.itemQuantity.setFocusable(false);
             holder.itemQuantity.setVisibility(View.VISIBLE);
+            holder.itemPrice.setClickable(false);
+            holder.itemPrice.setFocusable(false);
+            holder.itemPrice.setVisibility(View.VISIBLE);
             holder.decreaseQuantity.setVisibility(View.GONE);
             holder.increaseQuantity.setVisibility(View.GONE);
         }
 
         String itemId = itemList.get(position).getId();
         String categoryId = itemList.get(position).getCategoryId();
+
+        // update item price
+        if(isShopkeeper || isEmployee){
+            holder.itemName.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View view) {
+                       AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                       String itemName = itemList.get(position).getName();
+                       builder.setTitle("Change Name of " + itemName + " Item");
+
+                       final EditText input = new EditText(view.getContext());
+                       input.setHint("Enter the updated name");
+                       input.setInputType(InputType.TYPE_CLASS_TEXT);
+                       builder.setView(input);
+
+                       builder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
+                               holder.itemPrice.setText(input.getText().toString());
+                               db.collection("category").document(categoryId)
+                                       .collection("item").document(itemId)
+                                       .update("name", (input.getText().toString()))
+                                       .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                           @Override
+                                           public void onSuccess(Void unused) {
+                                               Toast.makeText(view.getContext(), "Item Name Updated Successfully!", Toast.LENGTH_SHORT).show();
+                                           }
+                                       })
+                                       .addOnFailureListener(new OnFailureListener() {
+                                           @Override
+                                           public void onFailure(@NonNull Exception e) {
+                                               Toast.makeText(view.getContext(), "Error! (Item Name Updation)", Toast.LENGTH_SHORT).show();
+                                           }
+                                       });
+                               dialog.dismiss();
+                           }
+                       });
+                       builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
+                               dialog.cancel();
+                           }
+                       });
+                       builder.show();
+                   }
+               });
+
+               holder.itemPrice.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View view) {
+                       AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                       String itemName = itemList.get(position).getName();
+                       builder.setTitle("Change Price of " + itemName + " Item");
+
+                       final EditText input = new EditText(view.getContext());
+                       input.setHint("Enter the updated price");
+                       input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                       builder.setView(input);
+
+                       builder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
+                               holder.itemPrice.setText(input.getText().toString());
+                               db.collection("category").document(categoryId)
+                                       .collection("item").document(itemId)
+                                       .update("price", Integer.valueOf(input.getText().toString()))
+                                       .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                           @Override
+                                           public void onSuccess(Void unused) {
+                                               Toast.makeText(view.getContext(), "Item Price Updated Successfully!", Toast.LENGTH_SHORT).show();
+                                           }
+                                       })
+                                       .addOnFailureListener(new OnFailureListener() {
+                                           @Override
+                                           public void onFailure(@NonNull Exception e) {
+                                               Toast.makeText(view.getContext(), "Error! (Item Price Updation)", Toast.LENGTH_SHORT).show();
+                                           }
+                                       });
+                               dialog.dismiss();
+                           }
+                       });
+                       builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
+                               dialog.cancel();
+                           }
+                       });
+                       builder.show();
+                   }
+               });
+        }
 
         holder.decreaseQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +233,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                     });
             }
         });
+
+
 
         if (isShopkeeper || isEmployee) {
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {

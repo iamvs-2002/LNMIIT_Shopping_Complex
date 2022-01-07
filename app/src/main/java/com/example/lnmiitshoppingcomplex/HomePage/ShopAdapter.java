@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.lnmiitshoppingcomplex.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.List;
 
@@ -90,19 +93,28 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         timing.setText(String.format("%s - %s", shop.startTime, shop.endTime));
 
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db = FirebaseFirestore.getInstance();
-        db.collection("setting").document("settings")
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot!=null){
-                            String temp = (Boolean) documentSnapshot.get("shopstatus") ? "Open" : "Closed";
-                            status.setText(temp);
+        if(position==2){
+            // fetch the shop status in real time
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("setting").document("settings")
+                    .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                            if (documentSnapshot!=null){
+                                String temp = (Boolean) documentSnapshot.get("shopstatus") ? "Open" : "Closed";
+                                status.setText(temp);
+                            }
                         }
-                    }
-                });
+                    });
+        }
+        else{
+            boolean s = shop.getStatus();
+            if (s) {
+                status.setText("Open");
+            } else {
+                status.setText("Closed");
+            }
+        }
 
         shopCard.setCardBackgroundColor(shop.getColor());
 
