@@ -66,8 +66,8 @@ public class StationaryShop extends AppCompatActivity {
     Toolbar toolbar;
     String mode;
     LinearLayout addCategoryLayout;
-    static boolean isShopkeeper;
-    static boolean isEmployee;
+    static boolean isShopkeeper = false;
+    static boolean isEmployee = false;
     ExtendedFloatingActionButton addItemEfab;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -109,6 +109,8 @@ public class StationaryShop extends AppCompatActivity {
         } else if (mode!=null && mode.equals("e")) {
             isEmployee = true;
         } else {
+            isShopkeeper = false;
+            isEmployee = false;
             addCategoryLayout.setVisibility(View.GONE);
             addItemEfab.setVisibility(View.GONE);
         }
@@ -425,7 +427,10 @@ public class StationaryShop extends AppCompatActivity {
                 return true;
             case R.id.stationaryshop_shopkeeper_logout:
                 mAuth.signOut();
-                startActivity(new Intent(StationaryShop.this, StationaryShop.class));
+                mode = null;
+                Intent self = new Intent(StationaryShop.this, StationaryShop.class);
+                self.putExtra("mode", mode);
+                startActivity(self);
                 finish();
                 finishAffinity();
                 return true;
