@@ -83,7 +83,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             Picasso.get().load(item.getImgUrl()).into(holder.itemImage);
         }
 
-        if(!isShopkeeper){
+        if(!isShopkeeper || !isEmployee){
             holder.itemQuantity.setClickable(false);
             holder.itemQuantity.setFocusable(false);
             holder.itemQuantity.setVisibility(View.VISIBLE);
