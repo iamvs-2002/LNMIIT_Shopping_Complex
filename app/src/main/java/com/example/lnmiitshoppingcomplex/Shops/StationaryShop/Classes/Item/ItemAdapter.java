@@ -175,7 +175,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                                holder.itemPrice.setText(input.getText().toString());
                                db.collection("category").document(categoryId)
                                        .collection("item").document(itemId)
-                                       .update("price", Integer.valueOf(input.getText().toString()))
+                                       .update("price", Integer.parseInt(input.getText().toString()))
                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                                            @Override
                                            public void onSuccess(Void unused) {

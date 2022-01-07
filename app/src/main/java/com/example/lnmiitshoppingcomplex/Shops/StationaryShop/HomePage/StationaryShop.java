@@ -319,8 +319,8 @@ public class StationaryShop extends AppCompatActivity {
                             ItemModel item = new ItemModel();
                             item.setId(documentSnapshot.getId());
                             item.setName(documentSnapshot.get("name").toString());
-                            item.setPrice(Integer.parseInt(documentSnapshot.get("price").toString()));
                             item.setQuantity(Integer.parseInt(documentSnapshot.get("quantity").toString()));
+                            item.setPrice(Integer.parseInt(documentSnapshot.get("price").toString()));
                             item.setImgUrl(documentSnapshot.get("imgUrl").toString());
                             item.setCategoryId(documentSnapshot.get("categoryId").toString());
 
