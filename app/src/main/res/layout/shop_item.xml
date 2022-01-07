@@ -36,6 +36,7 @@
             android:gravity="center">
 
             <ImageButton
+                android:visibility="gone"
                 android:id="@+id/citem_quantity_decrease"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,6 +59,7 @@
                 android:textSize="12sp" />
 
             <ImageButton
+                android:visibility="gone"
                 android:id="@+id/citem_quantity_increase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

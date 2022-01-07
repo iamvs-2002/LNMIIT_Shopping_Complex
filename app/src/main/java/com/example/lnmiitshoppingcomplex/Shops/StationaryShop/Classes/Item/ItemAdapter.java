@@ -84,7 +84,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         }
 
         // both shopkeeper and employee can edit the quantity and price
-        if(!isShopkeeper && !isEmployee){
+        if(isShopkeeper || isEmployee){
+            holder.itemQuantity.setClickable(true);
+            holder.itemQuantity.setFocusable(true);
+            holder.itemQuantity.setVisibility(View.VISIBLE);
+            holder.decreaseQuantity.setVisibility(View.VISIBLE);
+            holder.increaseQuantity.setVisibility(View.VISIBLE);
+        }
+        else{
             holder.itemQuantity.setClickable(false);
             holder.itemQuantity.setFocusable(false);
             holder.itemQuantity.setVisibility(View.VISIBLE);

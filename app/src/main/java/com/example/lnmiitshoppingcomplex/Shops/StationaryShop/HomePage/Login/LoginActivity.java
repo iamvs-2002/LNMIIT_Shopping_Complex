@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -51,14 +52,16 @@ public class LoginActivity extends AppCompatActivity {
                 username.setClickable(false);
                 passwords.setClickable(false);
                 progressBar.setVisibility(View.VISIBLE);
-                String email = username.getText().toString();
-                String password = passwords.getText().toString();
+
+                String email = username.getText().toString().trim();
+                String password = passwords.getText().toString().trim();
 
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
+                                    Log.e("XXX","XXX");
                                     progressBar.setVisibility(View.INVISIBLE);
                                     Toast.makeText(getApplicationContext(), "Logged in successfully!", Toast.LENGTH_SHORT).show();
                                     String mode = "s";
