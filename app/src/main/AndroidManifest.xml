@@ -13,30 +13,39 @@
         android:theme="@style/Theme.LNMIITShoppingComplex">
         <activity
             android:name=".Shops.StationaryShop.MenuItems.PhotoStat.PhotoStatActivity"
+            android:screenOrientation="userPortrait"
             android:exported="false" />
         <activity
             android:name=".Shops.StationaryShop.MenuItems.ManageEmployees.Classes.AddEmployee"
+            android:screenOrientation="userPortrait"
             android:exported="false" />
         <activity
             android:name=".Shops.StationaryShop.MenuItems.ManageEmployees.ManageEmployees"
+            android:screenOrientation="userPortrait"
             android:exported="false" />
         <activity
             android:name=".Shops.StationaryShop.MenuItems.AboutUs.AboutUs"
+            android:screenOrientation="userPortrait"
             android:exported="false" />
         <activity
             android:name=".Shops.StationaryShop.MenuItems.Settings.Settings"
+            android:screenOrientation="userPortrait"
             android:exported="false" />
         <activity
             android:name=".Shops.StationaryShop.HomePage.Login.LoginActivity"
+            android:screenOrientation="userPortrait"
             android:exported="false" />
         <activity
             android:name=".Startup.WelcomeActivity"
+            android:screenOrientation="userPortrait"
             android:exported="false" />
         <activity
             android:name=".Shops.StationaryShop.HomePage.StationaryShop"
+            android:screenOrientation="userPortrait"
             android:exported="false" />
         <activity
             android:name=".Startup.SplashActivity"
+            android:screenOrientation="userPortrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,12 +55,15 @@
         </activity>
         <activity
             android:name=".HomePage.MainActivity"
+            android:screenOrientation="userPortrait"
             android:exported="true" />
         <activity
             android:name=".Shops.StationaryShop.HomePage.AddItem.AddItem"
+            android:screenOrientation="userPortrait"
             android:exported="false" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:screenOrientation="userPortrait"
             android:theme="@style/Base.Theme.AppCompat" />
     </application>
 

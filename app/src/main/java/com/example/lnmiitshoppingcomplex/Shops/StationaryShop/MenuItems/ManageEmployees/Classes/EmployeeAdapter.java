@@ -55,6 +55,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             Picasso.get().load(employee.getImgUrl()).into(holder.imgEmployee);
         }
 
+        // delete an employee
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

@@ -32,7 +32,6 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     private RecyclerView shopListView;
-
     private FirebaseAuth mAuth;
 
     @Override
@@ -42,11 +41,11 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-
+        // set the app name on the toolbar
         toolbar = findViewById(R.id.mytoolbar);
         setSupportActionBar(toolbar);
 
-
+        // list of all the shops
         List<ShopModel> shops = new ArrayList<>();
         ShopModel s1 = new ShopModel("Grocery and Fruit shop","08:00","22:00","Shopkeeper Name", Color.parseColor("#FF6347"));
         ShopModel s2 = new ShopModel("Barber shop","08:00","22:00","Shopkeeper Name", Color.parseColor("#FF018786"));
@@ -59,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         shops= Arrays.asList(s1,s2,s3,s4,s5,s6,s7);
 
         shopListView = findViewById(R.id.SHOP_LIST_VIEW);
+        // showing these shops in the recycler view using adapter
         ShopAdapter adapter = new ShopAdapter(this,shops);
         shopListView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -73,15 +73,17 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 2 : //Toast.makeText(MainActivity.this, "Shop3", Toast.LENGTH_SHORT).show();
+                        // Stationary and PhotoStat Shop
+                        // checking if the user has already logged in
                         FirebaseUser currentUser = mAuth.getCurrentUser();
 
                         String m = null;
                         if(currentUser != null){
                             String mode = currentUser.getEmail();
                             if(mode.equals("admin@gmail.com"))
-                                m = "s";
+                                m = "s"; // shopkeeper
                             else if(mode.equals("root@gmail.com"))
-                                m = "e";
+                                m = "e"; // employee
 
                         }
                         Intent loginIntent = new Intent(getApplicationContext(), StationaryShop.class);
@@ -124,9 +126,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
                 finishAffinity();
-                return true;
-            case R.id.settings:
-                Toast.makeText(getApplicationContext(),"Settings Selected",Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

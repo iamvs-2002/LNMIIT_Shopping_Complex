@@ -118,6 +118,7 @@ public class AddItem extends AppCompatActivity {
         });
     }
 
+    // add item to database
     private void addItem() {
         HashMap<String, Object> item = new HashMap<>();
         item.put("name", name);
@@ -146,6 +147,7 @@ public class AddItem extends AppCompatActivity {
             });
     }
 
+    // load categories in the spinner in the dialog
     private void loadCategories() {
         db.collection("category")
             .orderBy("name")
@@ -166,6 +168,7 @@ public class AddItem extends AppCompatActivity {
         });
     }
 
+    // result of crop activity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -187,6 +190,7 @@ public class AddItem extends AppCompatActivity {
         }
     }
 
+    // upload image to the firebase storage
     private void uploadImage() {
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Uploading");

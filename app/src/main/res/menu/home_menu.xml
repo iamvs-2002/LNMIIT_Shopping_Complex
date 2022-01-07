@@ -8,9 +8,4 @@
         app:showAsAction="never"
         android:icon="@drawable/ic_baseline_refresh_24"
         android:title="Refresh" />
-    <item
-        android:id="@+id/settings"
-        app:showAsAction="never"
-        android:icon="@drawable/ic_baseline_settings_24"
-        android:title="Settings" />
 </menu>

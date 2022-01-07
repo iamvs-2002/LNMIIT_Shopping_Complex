@@ -84,6 +84,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             }
         });
 
+        // shopkeeper and employee can delete the category
         if (mode!=null && (mode.equals("s") || mode.equals("e"))) {
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override

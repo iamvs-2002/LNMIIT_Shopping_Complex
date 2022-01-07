@@ -9,12 +9,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class ShopModel {
-    String name;
-    String startTime;
-    String endTime;
-    String shopkeeperName;
+    String name; // shop name
+    String startTime; // shop open time
+    String endTime; // shop close time
+    String shopkeeperName; // shopkeeper name
     Boolean status; // 1 for open and 0 for closed
-    int color;
+    int color; // background color
 
     public ShopModel(String name, String startTime, String endTime, String shopkeeperName, int color) {
         this.name = name;

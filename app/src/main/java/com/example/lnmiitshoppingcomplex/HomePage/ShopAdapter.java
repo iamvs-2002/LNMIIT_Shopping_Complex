@@ -25,7 +25,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
     Context context;
     private List<ShopModel> shops;
 
-    // Click listener object created for recycler view item click
+    // Click listener object created for recycler view item(shop) click
     private onRecyclerViewItemClickListener itemListener;
 
     // Interface to perform action for click on item in recycler view

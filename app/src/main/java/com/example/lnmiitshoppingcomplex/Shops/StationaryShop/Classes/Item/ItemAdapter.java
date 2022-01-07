@@ -83,6 +83,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             Picasso.get().load(item.getImgUrl()).into(holder.itemImage);
         }
 
+        // both shopkeeper and employee can edit the quantity and price
         if(!isShopkeeper && !isEmployee){
             holder.itemQuantity.setClickable(false);
             holder.itemQuantity.setFocusable(false);

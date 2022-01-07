@@ -70,6 +70,7 @@ public class ManageEmployees extends AppCompatActivity {
         loadEmployees();
     }
 
+    // fetch employees from database
     private void loadEmployees() {
         db.collection("employee")
             .orderBy("name")
