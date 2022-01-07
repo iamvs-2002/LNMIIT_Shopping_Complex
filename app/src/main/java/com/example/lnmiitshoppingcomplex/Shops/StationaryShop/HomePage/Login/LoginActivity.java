@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
+                                    progressBar.setVisibility(View.INVISIBLE);
                                     Toast.makeText(getApplicationContext(), "Logged in successfully!", Toast.LENGTH_SHORT).show();
                                     String mode = "s";
                                     if(email.equals("admin@gmail.com") && password.equals("admin123")){
@@ -70,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                                         mode = "e";
 
                                     }
+
                                     Intent loginIntent = new Intent(LoginActivity.this, StationaryShop.class);
                                     loginIntent.putExtra("mode",mode);
                                     startActivity(loginIntent);
@@ -83,7 +85,15 @@ public class LoginActivity extends AppCompatActivity {
                                     progressBar.setVisibility(View.INVISIBLE);
                                 }
                             }
-                        });
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        login.setClickable(true);
+                        username.setClickable(true);
+                        passwords.setClickable(true);
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
+                });
             }
         });
     }
