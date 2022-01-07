@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), "Successfully in successfully!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Logged in successfully!", Toast.LENGTH_SHORT).show();
                                     String mode = "s";
                                     if(email.equals("admin@gmail.com") && password.equals("admin123")){
                                         //login
