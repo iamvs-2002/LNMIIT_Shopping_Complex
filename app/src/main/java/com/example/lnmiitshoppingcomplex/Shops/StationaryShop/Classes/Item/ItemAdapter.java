@@ -128,22 +128,29 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                        builder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
                            @Override
                            public void onClick(DialogInterface dialog, int which) {
-                               holder.itemPrice.setText(input.getText().toString());
-                               db.collection("category").document(categoryId)
-                                       .collection("item").document(itemId)
-                                       .update("name", (input.getText().toString()))
-                                       .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                           @Override
-                                           public void onSuccess(Void unused) {
-                                               Toast.makeText(view.getContext(), "Item Name Updated Successfully!", Toast.LENGTH_SHORT).show();
-                                           }
-                                       })
-                                       .addOnFailureListener(new OnFailureListener() {
-                                           @Override
-                                           public void onFailure(@NonNull Exception e) {
-                                               Toast.makeText(view.getContext(), "Error! (Item Name Updation)", Toast.LENGTH_SHORT).show();
-                                           }
-                                       });
+                               String n = input.getText().toString();
+
+                               if(!n.isEmpty()) {
+                                   holder.itemPrice.setText(n);
+                                   db.collection("category").document(categoryId)
+                                           .collection("item").document(itemId)
+                                           .update("name", n)
+                                           .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                               @Override
+                                               public void onSuccess(Void unused) {
+                                                   Toast.makeText(view.getContext(), "Item Name Updated Successfully!", Toast.LENGTH_SHORT).show();
+                                               }
+                                           })
+                                           .addOnFailureListener(new OnFailureListener() {
+                                               @Override
+                                               public void onFailure(@NonNull Exception e) {
+                                                   Toast.makeText(view.getContext(), "Error! (Item Name Updation)", Toast.LENGTH_SHORT).show();
+                                               }
+                                           });
+                               }
+                               else {
+                                   Toast.makeText(context, "Name can't be empty!", Toast.LENGTH_SHORT).show();
+                               }
                                dialog.dismiss();
                            }
                        });
@@ -172,23 +179,31 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                        builder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
                            @Override
                            public void onClick(DialogInterface dialog, int which) {
-                               holder.itemPrice.setText(input.getText().toString());
-                               db.collection("category").document(categoryId)
-                                       .collection("item").document(itemId)
-                                       .update("price", Integer.parseInt(input.getText().toString()))
-                                       .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                           @Override
-                                           public void onSuccess(Void unused) {
-                                               Toast.makeText(view.getContext(), "Item Price Updated Successfully!", Toast.LENGTH_SHORT).show();
-                                           }
-                                       })
-                                       .addOnFailureListener(new OnFailureListener() {
-                                           @Override
-                                           public void onFailure(@NonNull Exception e) {
-                                               Toast.makeText(view.getContext(), "Error! (Item Price Updation)", Toast.LENGTH_SHORT).show();
-                                           }
-                                       });
+                               String p = input.getText().toString();
+                               if(!p.isEmpty()){
+                                   holder.itemPrice.setText(p);
+
+                                   db.collection("category").document(categoryId)
+                                           .collection("item").document(itemId)
+                                           .update("price", Integer.parseInt(p))
+                                           .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                               @Override
+                                               public void onSuccess(Void unused) {
+                                                   Toast.makeText(view.getContext(), "Item Price Updated Successfully!", Toast.LENGTH_SHORT).show();
+                                               }
+                                           })
+                                           .addOnFailureListener(new OnFailureListener() {
+                                               @Override
+                                               public void onFailure(@NonNull Exception e) {
+                                                   Toast.makeText(view.getContext(), "Error! (Item Price Updation)", Toast.LENGTH_SHORT).show();
+                                               }
+                                           });
+                               }
+                               else{
+                                   Toast.makeText(context, "Price can't be empty!", Toast.LENGTH_SHORT).show();
+                               }
                                dialog.dismiss();
+
                            }
                        });
                        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
