@@ -1,4 +1,4 @@
-# LNMIIT_Shopping_Complex
+# LNMIIT Shopping Complex
 
 LNMIIT Shopping Complex is an android application that serves the purpose of as well as stock management for shops such as Stationery and Photostat Shop, Barber Shop, Grocery and Fruit Shop, Laundry Shop, etc. As of now, the Stationery and Photostat Shop has been implemented. 
 
